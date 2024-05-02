@@ -1,25 +1,24 @@
 
 
-
-
-import java.io.File;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
-
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class servlet_log0 extends HttpServlet {
+public class servlet_log1 extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	String preTituloHTML5 = "<!DOCTYPE html>\n<html>\n<head>\n<meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\" />";
 
-    public servlet_log0() {
+    public servlet_log1() {
         super();
     }
 
@@ -28,21 +27,25 @@ public class servlet_log0 extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String directorioActual = System.getProperty("user.dir");
-		File directorio = new File(directorioActual);
-		File[] archivos = directorio.listFiles();
-		
 		
 		
 		try {
-			 
-			 
-			
+			ServletContext context = getServletContext();
+			String BDFileName = context.getInitParameter("fichero-persistencia");
+			//PrintWriter outDB = new PrintWriter("logs.txt");
+			//FileWriter file = new FileWriter("logs.txt"); 
 			PrintWriter out = response.getWriter();
-		
+			String rutaArchivo = "./tomcat/webapps/Trabajo-NOL/logs/logs1.txt";
+			 FileWriter fileWriter = new FileWriter(rutaArchivo,true);
+			 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			
+			 String directorioActual = System.getProperty("user.dir");
+			 System.out.println("Directorio actual: " + directorioActual);
+
 			
 		    // String t=request.getParameter("");
 			response.setContentType("text/html");
+			
 			out.println("<html><head><title>Info</title></head><body><table>");
 			out.println("<tr><td colspan=2><b>Info Path</b></td><tr>");
 			out.println("<tr><td>Request URL</td><td>"+request.getRequestURL()+"</td><tr>");
@@ -53,15 +56,16 @@ public class servlet_log0 extends HttpServlet {
 			out.println("<tr><td>Remote Host</td><td>"+request.getRemoteHost()+"</td><tr>");
 			out.println("<tr><td>Remote Port</td><td>"+request.getRemotePort()+"</td><tr>");
 			out.println("<tr><td>Current Time</td><td>"+ LocalDateTime.now()+"</td><tr>");
+			out.println("<tr><td>Archivo persistencia</td><td>"+ BDFileName +"</td><tr>");
 			out.println("<tr><td>directorio actual</td><td>"+ directorioActual +"</td><tr>");
 			
-			if(archivos !=null) {
-				for (File archivo : archivos) {
-					out.println("<tr><td></td><td>"+ archivo +"</td><tr>");
-					
-				}
-			}
+			//outDB.println(LocalDateTime.now());
+			 bufferedWriter.write("Hola, este es un ejemplo de cómo escribir en un archivo en Java.");
+			 bufferedWriter.close();
+			 System.out.println("salida buena");
+			//outDB.flush();
 			
+			//outDB.close();
 			
 		}catch(IOException e){
 			
