@@ -53,4 +53,14 @@
     <servlet-name>servlet_log2</servlet-name>
     <url-pattern>/servlet_log2</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>servlet_listar_archivo_persistencia</display-name>
+    <servlet-name>servlet_listar_archivo_persistencia</servlet-name>
+    <servlet-class>servlet_listar_archivo_persistencia</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>servlet_listar_archivo_persistencia</servlet-name>
+    <url-pattern>/servlet_listar_archivo_persistencia</url-pattern>
+  </servlet-mapping>
 </web-app>
