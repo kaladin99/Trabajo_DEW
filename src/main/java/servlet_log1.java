@@ -28,10 +28,15 @@ public class servlet_log1 extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String result = request.getRemoteHost() + " - " +LocalDateTime.now() + " - " + request.getMethod() + " " + request.getRequestURL() + " \n";
+		
+		
+		
 		
 		try {
-			ServletContext context = getServletContext();
-			String BDFileName = context.getInitParameter("fichero-persistencia");
+			
+			//ServletContext context = getServletContext();
+			//String BDFileName = context.getInitParameter("fichero-persistencia");
 			//PrintWriter outDB = new PrintWriter("logs.txt");
 			//FileWriter file = new FileWriter("logs.txt"); 
 			PrintWriter out = response.getWriter();
@@ -41,10 +46,14 @@ public class servlet_log1 extends HttpServlet {
 			
 			 String directorioActual = System.getProperty("user.dir");
 			 System.out.println("Directorio actual: " + directorioActual);
-
+			 
+			 out.println("<html><head><title>Log 0</title></head><body>");
+			 out.println("<span>" + result + "</span>");
+			 out.println("</body></html>");
 			
 		    // String t=request.getParameter("");
 			response.setContentType("text/html");
+			/*
 			
 			out.println("<html><head><title>Info</title></head><body><table>");
 			out.println("<tr><td colspan=2><b>Info Path</b></td><tr>");
@@ -58,12 +67,12 @@ public class servlet_log1 extends HttpServlet {
 			out.println("<tr><td>Current Time</td><td>"+ LocalDateTime.now()+"</td><tr>");
 			out.println("<tr><td>Archivo persistencia</td><td>"+ BDFileName +"</td><tr>");
 			out.println("<tr><td>directorio actual</td><td>"+ directorioActual +"</td><tr>");
-			
+			*/
 			//outDB.println(LocalDateTime.now());
-			 bufferedWriter.write("Hola, este es un ejemplo de cómo escribir en un archivo en Java.");
+			 bufferedWriter.write(result);
 			 bufferedWriter.close();
-			 System.out.println("salida buena");
-			//outDB.flush();
+			 
+			
 			
 			//outDB.close();
 			

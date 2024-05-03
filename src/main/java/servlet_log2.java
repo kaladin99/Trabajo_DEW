@@ -28,6 +28,7 @@ public class servlet_log2 extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String result = request.getRemoteHost() + " - " +LocalDateTime.now() + " - " + request.getMethod() + " " + request.getRequestURL() +"\n";
 		
 		try {
 			ServletContext context = getServletContext();
@@ -39,7 +40,10 @@ public class servlet_log2 extends HttpServlet {
 			 FileWriter fileWriter = new FileWriter(BDFileName);
 			 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			
-			
+			 out.println("<html><head><title>Log 0</title></head><body>");
+			 out.println("<span>" + result + "</span>");
+			 out.println("</body></html>");
+			 /*
 			
 		    // String t=request.getParameter("");
 			response.setContentType("text/html");
@@ -54,11 +58,11 @@ public class servlet_log2 extends HttpServlet {
 			out.println("<tr><td>Remote Port</td><td>"+request.getRemotePort()+"</td><tr>");
 			out.println("<tr><td>Current Time</td><td>"+ LocalDateTime.now()+"</td><tr>");
 			out.println("<tr><td>Archivo persistencia</td><td>"+ BDFileName +"</td><tr>");
-			
+			*/
 			//outDB.println(LocalDateTime.now());
-			 bufferedWriter.write("Hola, este es un ejemplo de cómo escribir en un archivo en Java.");
+			 bufferedWriter.write(result);
 			 bufferedWriter.close();
-			 System.out.println("salida buena");
+			 
 			//outDB.flush();
 			
 			//outDB.close();
