@@ -33,39 +33,18 @@ public class servlet_log2 extends HttpServlet {
 		try {
 			ServletContext context = getServletContext();
 			String BDFileName = context.getInitParameter("fichero-persistencia");
-			//PrintWriter outDB = new PrintWriter("logs.txt");
-			//FileWriter file = new FileWriter("logs.txt"); 
+			
 			PrintWriter out = response.getWriter();
 			
-			 FileWriter fileWriter = new FileWriter(BDFileName);
+			 FileWriter fileWriter = new FileWriter(BDFileName,true);
 			 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			
 			 out.println("<html><head><title>Log 0</title></head><body>");
 			 out.println("<span>" + result + "</span>");
 			 out.println("</body></html>");
-			 /*
 			
-		    // String t=request.getParameter("");
-			response.setContentType("text/html");
-			out.println("<html><head><title>Info</title></head><body><table>");
-			out.println("<tr><td colspan=2><b>Info Path</b></td><tr>");
-			out.println("<tr><td>Request URL</td><td>"+request.getRequestURL()+"</td><tr>");
-			out.println("<tr><td>Context Path</td><td>"+request.getContextPath()+"</td><tr>");out.println("<tr><td>Servlet Path</td><td>"+request.getServletPath()+"</td><tr>");out.println("<tr><td>Path Info</td><td>"+request.getPathInfo()+"</td><tr>");
-			out.println("<tr><td>Query String</td><td>"+request.getQueryString()+"</td><tr>");out.println("<tr><td colspan=2><b>Protocolo HTTP</b></td><tr>");
-			out.println("<tr><td>Metodo</td><td>"+request.getMethod()+"</td><tr>");
-			out.println("<tr><td>Remote Addr</td><td>"+request.getRemoteAddr()+"</td><tr>");
-			out.println("<tr><td>Remote Host</td><td>"+request.getRemoteHost()+"</td><tr>");
-			out.println("<tr><td>Remote Port</td><td>"+request.getRemotePort()+"</td><tr>");
-			out.println("<tr><td>Current Time</td><td>"+ LocalDateTime.now()+"</td><tr>");
-			out.println("<tr><td>Archivo persistencia</td><td>"+ BDFileName +"</td><tr>");
-			*/
-			//outDB.println(LocalDateTime.now());
 			 bufferedWriter.write(result);
 			 bufferedWriter.close();
-			 
-			//outDB.flush();
-			
-			//outDB.close();
 			
 		}catch(IOException e){
 			
