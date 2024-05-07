@@ -1,4 +1,9 @@
-
+/*
+	Este código no tiene muchas diferencias respecto al log0.java y log1.java,
+	por ello comentaremos únicamente aquellos aspectos diferentes que puedan causar dudas.
+ 	La principal diferencia es que además de lo que hemos hecho antes, en este caso
+  	añadiremos las peticiones almacenadas en result en un documento
+*/
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -31,7 +36,13 @@ public class servlet_log2 extends HttpServlet {
 		String result = request.getRemoteHost() + " - " +LocalDateTime.now() + " - " + request.getMethod() + " " + request.getRequestURL() +"\n";
 		
 		try {
-			ServletContext context = getServletContext();
+			/*
+	   			obtenemos el contexto del servlet, donde podemos acceder a información, configuración, etc.
+				ServletContext context = getServletContext();
+				obtenemos el valor que hay almacenado en la variable "fichero-persistencia", que es la ruta
+				del archivo donde escribiremos. Esta vez, no introducimos la ruta manualmente, sino que la
+    				obtenemos de una de las variables del contexto del servlet, almacenada en web.xml
+			*/
 			String BDFileName = context.getInitParameter("fichero-persistencia");
 			
 			PrintWriter out = response.getWriter();
