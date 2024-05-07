@@ -1,3 +1,10 @@
+/*
+	Este código no tiene muchas diferencias respecto al log0.java,
+	por ello comentaremos únicamente aquellos aspectos diferentes que puedan causar dudas.
+ 	La principal diferencia es que además de lo que hemos hecho antes, en este caso
+  	añadiremos las peticiones almacenadas en result en un documento
+*/
+
 
 
 import java.io.BufferedWriter;
@@ -34,10 +41,15 @@ public class servlet_log1 extends HttpServlet {
 			
 			 
 			PrintWriter out = response.getWriter();
+			//definimos la ruta del archivo en la que almacenaremos el "result", y la escribimos a mano
 			String rutaArchivo = "./tomcat/webapps/Trabajo-NOL/logs/logs1.txt";
+			//definimos un filewriter para poder esccribir sobre el archivo indicado en la ruta 
+			//y lo ponemos a true para que escriba sobre lo que ya hay y no sobreescriba
 			FileWriter fileWriter = new FileWriter(rutaArchivo,true);
+			//el bufferedWritter es un envoltorio de filewritter que mejora en eficiencia
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-			
+
+			 //obtenemos el directorio actual del usuario y lo mostramos por terminal
 			 String directorioActual = System.getProperty("user.dir");
 			 System.out.println("Directorio actual: " + directorioActual);
 			 
@@ -47,8 +59,10 @@ public class servlet_log1 extends HttpServlet {
 			
 		   
 			 response.setContentType("text/html");
-			
+
+			 //escribimos lo que hay en la variable result y lo almacenamos en un archivo
 			 bufferedWriter.write(result);
+			 //cerramos el buffer de escritura
 			 bufferedWriter.close();
 			
 		}catch(IOException e){
