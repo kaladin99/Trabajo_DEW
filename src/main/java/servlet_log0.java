@@ -6,7 +6,7 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
-
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,8 +28,33 @@ public class servlet_log0 extends HttpServlet {
     }
 	//esto es lo que ejecuta cuando recibe petición GET
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//responde a la petición con "Served at:" seguido de la ruta de la solicitud
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		Enumeration<String> names;
+		
+		
+		//creamos un Writer de respuesta al cliente al que llamamos "out"
+		PrintWriter out = response.getWriter();
+		//establecemos el tipo de contenido como html
+		response.setContentType("text/html");
+		
+		//creamos el string del resultado
+		//contiene dirección de host remoto, fecha y hora actual, método de solicitud (será POST porque está en doPost) y la URL de la solicitud
+		String result = request.getRemoteHost() + " - " +LocalDateTime.now() + " - " + request.getMethod() + " " + request.getRequestURL() + " Informacion formulario -->";
+		
+		names = request.getParameterNames();
+		String parametersResult = "";
+		while (names.hasMoreElements()) {
+			String name = names.nextElement();
+			parametersResult += " " + name + ": " + request.getParameter(name);
+		}
+
+		result += parametersResult;
+
+		//Lo dejo comentado porque no se si se ha llegado a llamar
+		//out.println(preTituloHTML5)
+		//creamos el documento HTML en el que mostramos el resultado
+		out.println("<!DOCTYPE html><html><head><title>Log 0</title> content=\"text/html\"; charset=\"utf-8\" </head><body>");
+		out.println("<span>" + result + "</span>");
+		out.println("</body></html>");
 	}
 
 	//esto es lo que se ejecuta cuando recibe petición POST

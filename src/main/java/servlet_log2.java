@@ -38,11 +38,13 @@ public class servlet_log2 extends HttpServlet {
 		try {
 			/*
 	   			obtenemos el contexto del servlet, donde podemos acceder a información, configuración, etc.
-				ServletContext context = getServletContext();
 				obtenemos el valor que hay almacenado en la variable "fichero-persistencia", que es la ruta
 				del archivo donde escribiremos. Esta vez, no introducimos la ruta manualmente, sino que la
     				obtenemos de una de las variables del contexto del servlet, almacenada en web.xml
 			*/
+			
+			ServletContext context = getServletContext();
+			
 			String BDFileName = context.getInitParameter("fichero-persistencia");
 			
 			PrintWriter out = response.getWriter();
