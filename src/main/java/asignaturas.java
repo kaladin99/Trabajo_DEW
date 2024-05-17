@@ -59,7 +59,7 @@ public class asignaturas extends HttpServlet {
 			conection.setRequestMethod("POST");
 			conection.setRequestProperty("accept", "application/json");
 			
-			Try(BufferedReader br = new BuferedReader)
+			//Try(BufferedReader br = new BuferedReader)
 			
 		}catch(Exception e) {
 			
