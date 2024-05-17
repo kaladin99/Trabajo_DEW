@@ -63,4 +63,24 @@
     <servlet-name>servlet_listar_archivo_persistencia</servlet-name>
     <url-pattern>/servlet_listar_archivo_persistencia</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>registro</display-name>
+    <servlet-name>registro</servlet-name>
+    <servlet-class>registro</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>registro</servlet-name>
+    <url-pattern>/registro</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>asignaturas</display-name>
+    <servlet-name>asignaturas</servlet-name>
+    <servlet-class>asignaturas</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>asignaturas</servlet-name>
+    <url-pattern>/asignaturas</url-pattern>
+  </servlet-mapping>
 </web-app>
