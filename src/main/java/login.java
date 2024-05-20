@@ -91,7 +91,7 @@ public class login extends HttpServlet {
 					
 				} catch (Exception e) {
 					sesion.invalidate();
-					request.logout();
+					
 					response.sendError(500, "Hubo problemas al recuperar la información." + e);
 					
 					return;
