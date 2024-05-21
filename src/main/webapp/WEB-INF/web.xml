@@ -119,6 +119,16 @@
     <url-pattern>/vista_alumno</url-pattern>
   </servlet-mapping>
   <session-config>
-  	<session-timeout>30</session-timeout>
+    <session-timeout>30</session-timeout>
   </session-config>
+  <servlet>
+    <description></description>
+    <display-name>cat_api</display-name>
+    <servlet-name>cat_api</servlet-name>
+    <servlet-class>cat_api</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cat_api</servlet-name>
+    <url-pattern>/cat_api</url-pattern>
+  </servlet-mapping>
 </web-app>
