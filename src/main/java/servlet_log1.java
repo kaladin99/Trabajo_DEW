@@ -95,7 +95,7 @@ public class servlet_log1 extends HttpServlet {
 		//definimos un filewriter para poder esccribir sobre el archivo indicado en la ruta 
 		//y lo ponemos a true para que escriba sobre lo que ya hay y no sobreescriba
 		FileWriter fileWriter = new FileWriter(rutaArchivo,true);
-		//el bufferedWritter es un envoltorio de filewritter que mejora en eficiencia
+		//El bufferedWritter es un envoltorio de filewritter que mejora en eficiencia
 		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 		
 		 //obtenemos el directorio actual del usuario y lo mostramos por terminal
