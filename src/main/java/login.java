@@ -84,7 +84,7 @@ public class login extends HttpServlet {
 					out.println ("<p> JSON Response: "+key+"</p>");
 					
 					sesion.setAttribute("key", key);
-					sesion.setAttribute("cookies", cookies);
+					sesion.setAttribute("cookies", cookies.get(0));
 		            
 		            con.disconnect();
 		            

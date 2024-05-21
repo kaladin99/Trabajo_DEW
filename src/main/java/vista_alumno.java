@@ -1,18 +1,25 @@
 
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.*;
 
 /**
  * Servlet implementation class vista_alumno
  */
 public class vista_alumno extends HttpServlet {
+	private String urlCE = "http://DEW-jrevvil-2324.dsicv.upv.es:9090/CentroEducativo";
 	private static final long serialVersionUID = 1L;
 	private static final String preHTML5 = "<!DOCTYPE html>\n<html lang=\"es-es\">\n" +
 			"<head>\n<meta charset=\"utf-8\" />\n" +
@@ -31,24 +38,27 @@ public class vista_alumno extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8"); 
 		PrintWriter out = response.getWriter();
 		out.println(preHTML5);
 		
 		HttpSession sesion = request.getSession();
+		String key = sesion.getAttribute("key").toString();
+	
+		String asignaturas = fetchGet(request, "/asignaturas");
+		out.println("<p> res.toString(): "+asignaturas+"</p>");
 		
-		out.println ("<p> sesion.getAttribute(\"dni\"): "+sesion.getAttribute("dni")+"</p>");
-		out.println ("<p> sesion.getAttribute(\"key\"): "+sesion.getAttribute("key")+"</p>");
-		out.println ("<p> sesion.getAttribute(\"cookies\"): "+sesion.getAttribute("cookies")+"</p>");
-		out.println ("<p> sesion.getAttribute(\"password\"): "+sesion.getAttribute("password")+"</p>");
-		out.println ("<p> request.getRemoteUser(): "+request.getRemoteUser()+"</p>");
-		out.println ("<p> request.isUserInRole(\"mirol\"): "+request.isUserInRole("mirol")+"</p>");
-		out.println ("<p> request.getUserPrincipal(): "+request.getUserPrincipal()+"</p>");
+		String alumno = fetchGet(request, "/alumnos/"+sesion.getAttribute("dni"));
+
+		out.println("<p> ALUMNO: "+alumno+"</p>");
 		
+		JSONArray asignaturasJSON = new JSONArray(asignaturas);
+		JSONObject asignatura0 = asignaturasJSON.getJSONObject(0);
+		out.println("<p> asignatura0: "+asignatura0+"</p>");
+	
 		out.println("</body></html>");
+
 	}
 
 	/**
@@ -57,6 +67,45 @@ public class vista_alumno extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	private String fetchGet(HttpServletRequest request, String url) {
+		HttpSession sesion = request.getSession();
+		String key = sesion.getAttribute("key").toString();
+		
+		try {
+			URL obj = new URL(urlCE+url+"?key="+key);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			con.setRequestMethod("GET");
+		    con.setDoInput(true);
+		    String cookie = (String) sesion.getAttribute("cookies");
+		    con.setRequestProperty("Cookie", cookie.split(";", 2)[0]);
+			
+			int responseCode = con.getResponseCode();
+			//System.out.println("GET Response Code :: " + responseCode);
+			if (responseCode == HttpURLConnection.HTTP_OK) { // success
+				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				String inputLine;
+				StringBuffer res = new StringBuffer();
+
+				while ((inputLine = in.readLine()) != null) {
+					res.append(inputLine);
+				}
+				in.close();
+				return res.toString();
+				//out.println("<p> res.toString(): "+res.toString()+"</p>");
+				// print result
+				//System.out.println(res.toString());
+			} else {
+				//out.println("<p> LA PETICION GET NO HA FUNCIONADO</p>");
+				System.out.println("GET request did not work.");
+				return "";
+			}
+		} catch (Exception e) {
+			//out.println("<p> exception " +e +"</p>");ç
+			System.out.println("GET request did not work." +e);
+			return "";
+		}
 	}
 
 }
