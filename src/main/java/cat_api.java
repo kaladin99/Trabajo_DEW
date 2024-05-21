@@ -69,7 +69,7 @@ public class cat_api extends HttpServlet {
 				JSONObject cat = cats.getJSONObject(0);
 				out.print(preHTML5);
 				//out.println("<div><img src=\""+cat.getString("url")+"\" alt=\"el gato\"/></div>");
-				//out.println(r);
+				out.println(r);
 				out.println("<div><img src=\"" + cat.getString("url") + "\" alt=\"el gato\"/></div>");
 				
 				out.println("</body></html>");
