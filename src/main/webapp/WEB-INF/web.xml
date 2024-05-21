@@ -99,7 +99,6 @@
       <url-pattern>/login</url-pattern>
     </web-resource-collection>
     <auth-constraint>
-      <role-name>mirol</role-name>
       <role-name>rolpro</role-name>
       <role-name>rolalu</role-name>
     </auth-constraint>

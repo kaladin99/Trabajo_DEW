@@ -19,7 +19,7 @@ import org.json.*;
  * Servlet implementation class vista_alumno
  */
 public class vista_alumno extends HttpServlet {
-	private String urlCE = "http://DEW-jrevvil-2324.dsicv.upv.es:9090/CentroEducativo";
+	private String urlCE = "http://localhost:9090/CentroEducativo";
 	private static final long serialVersionUID = 1L;
 	private static final String preHTML5 = "<!DOCTYPE html>\n<html lang=\"es-es\">\n" +
 			"<head>\n<meta charset=\"utf-8\" />\n" +
