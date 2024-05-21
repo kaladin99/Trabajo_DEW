@@ -15,7 +15,7 @@ import org.json.*;
 public class login extends HttpServlet {
 	private String[] users = new String[] {"12345678W"};
 	private static final long serialVersionUID = 1L;
-	private String urlCE = "http://DEW-jrevvil-2324.dsicv.upv.es:9090/CentroEducativo";
+	private String urlCE = "http://localhost:9090/CentroEducativo";
 	private static final String preHTML5 = "<!DOCTYPE html>\n<html lang=\"es-es\">\n" +
 			"<head>\n<meta charset=\"utf-8\" />\n" +
 			"<title>Login?</title>\n</head>\n<body>\n" +
