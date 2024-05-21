@@ -31,20 +31,16 @@ public class servlet_log1 extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String result = request.getRemoteHost() + " - " +LocalDateTime.now() + " - " + request.getMethod() + " " + request.getRequestURL() + " Informacion formulario -->";
+		
 		Enumeration<String> names;
 		
 		try {
 			
 			 
 		PrintWriter out = response.getWriter();
-		//definimos la ruta del archivo en la que almacenaremos el "result", y la escribimos a mano
-		String rutaArchivo = "./tomcat/webapps/Trabajo-NOL/logs/logs1.txt";
-		//definimos un filewriter para poder esccribir sobre el archivo indicado en la ruta 
-		//y lo ponemos a true para que escriba sobre lo que ya hay y no sobreescriba
-		FileWriter fileWriter = new FileWriter(rutaArchivo,true);
-		//el bufferedWritter es un envoltorio de filewritter que mejora en eficiencia
-		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+		response.setContentType("text/html");
+		String result = request.getRemoteHost() + " - " +LocalDateTime.now() + " - " + request.getMethod() + " " + request.getRequestURL() + " Informacion formulario -->";
+		
 		
 		 //obtenemos el directorio actual del usuario y lo mostramos por terminal
 		 String directorioActual = System.getProperty("user.dir");
@@ -64,9 +60,16 @@ public class servlet_log1 extends HttpServlet {
 		 out.println("<span>" + result + "</span>");
 		 out.println("</body></html>");
 			
-		   
-			 response.setContentType("text/html");
-
+		//definimos la ruta del archivo en la que almacenaremos el "result", y la escribimos a mano
+			String rutaArchivo = "/home/user/log1.txt";
+			//definimos un filewriter para poder esccribir sobre el archivo indicado en la ruta 
+			//y lo ponemos a true para que escriba sobre lo que ya hay y no sobreescriba
+			FileWriter fileWriter = new FileWriter(rutaArchivo,true);
+			//el bufferedWritter es un envoltorio de filewritter que mejora en eficiencia
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			 
+			fileWriter.write(result);
+			fileWriter.close();
 			 //escribimos lo que hay en la variable result y lo almacenamos en un archivo
 			 bufferedWriter.write(result);
 			 //cerramos el buffer de escritura

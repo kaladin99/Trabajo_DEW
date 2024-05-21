@@ -31,7 +31,7 @@
   </servlet-mapping>
   <context-param>
     <param-name>fichero-persistencia</param-name>
-    <param-value>./tomcat/webapps/Trabajo-NOL/logs/logs2.txt</param-value>
+    <param-value>/home/user/log2.txt</param-value>
   </context-param>
   <servlet>
     <description></description>

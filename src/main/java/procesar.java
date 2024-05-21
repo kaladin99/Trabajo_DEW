@@ -49,6 +49,7 @@ public class procesar extends HttpServlet {
     else { // Impar
       response.setContentType("text/plain");
       out.print("Procesar\nEl valor "+ t +" es impar.");
+      ;
     }
   }
 }

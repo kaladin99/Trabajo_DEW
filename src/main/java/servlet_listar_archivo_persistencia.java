@@ -37,7 +37,7 @@ public class servlet_listar_archivo_persistencia extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			
-            File file = new File("./tomcat/webapps/Trabajo-NOL/logs/logs1.txt");
+            File file = new File("/home/user/log1.txt");
             Scanner input = new Scanner(file);
             PrintWriter out = response.getWriter();
             response.setContentType("text/html");
@@ -52,7 +52,7 @@ public class servlet_listar_archivo_persistencia extends HttpServlet {
             
             out.println("<h3>Fichero Logs2.txt</h3>");
             
-            file = new File("./tomcat/webapps/Trabajo-NOL/logs/logs2.txt");
+            file = new File("/home/user/log2.txt");
             input = new Scanner(file);;
 			
             while (input.hasNextLine()) {
