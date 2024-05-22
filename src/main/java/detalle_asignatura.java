@@ -13,11 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
+import org.json.JSONArray;
+
 /**
  * Servlet implementation class lista_asignaturas
  */
 public class detalle_asignatura extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private String nota;
 	private String urlCE = "http://localhost:9090/CentroEducativo";
 	private static final String preHTML5 = "<!doctype html>\r\n"
 			+ "<html lang=\"en\" data-bs-theme=\"auto\">\r\n"
@@ -149,15 +153,38 @@ public class detalle_asignatura extends HttpServlet {
 		response.setCharacterEncoding("UTF-8"); 
 		PrintWriter out = response.getWriter();
 		out.println(preHTML5);
-		  
-		//String asig = request.getParameter("nameAsignatura");
-		String asig = "DEW";
-		String cred = "5";
-		String curs = "3";
-		String cuatri = "B";
+		
+		//Recoger que el acronimo de la asignatura que  se ha clicado
+		String asig = request.getParameter("nameAsignatura");
+		
+		//Obtener toda la información de la asigntura
+		String resAsig = fetchGet(request, "/asignaturas/" + asig);
+		
+		//Se pasa a JSON el string para acceder a sus atributos por separado
+		JSONObject jsonAsig = new JSONObject(resAsig);
+		   
+		
+		String asigsAlu = fetchGet(request, "/alumnos/" + sesion.getAttribute("dni")+ "/asignaturas");
+		JSONArray arrayAsigs = new JSONArray(asigsAlu);
+
+        JSONObject foundObject = null;
+        
+        for (int i = 0; i < arrayAsigs.length(); i++) {
+            JSONObject jsonObject = arrayAsigs.getJSONObject(i);
+            if (jsonObject.getString("asignatura").equals(asig)) {
+               foundObject = jsonObject;
+                break;
+            }
+       }
+       if(foundObject.getString("nota") != "") {
+    	    nota = foundObject.getString("nota");
+       } 
+       else {
+    	   nota = "Sin calificar";
+       }
 		
 		
-		out.println(" <body>\r\n"
+		out.println(" <body>\r\n"	
 				+ "    <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"d-none\">\r\n"
 				+ "      <symbol id=\"check2\" viewBox=\"0 0 16 16\">\r\n"
 				+ "        <path d=\"M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z\"/>\r\n"
@@ -228,17 +255,16 @@ public class detalle_asignatura extends HttpServlet {
 				+ "    <h2 class=\"mt-4\">Aquí puedes consultar tus evaluaciones</h2>\r\n"
 				+ "    <hr>  \r\n"
 				+ "    <div class=\"row mb-3 text-center\">\r\n"
-				+ "      <div class=\"col-md-4 themed-grid-col\">DEW</div>\r\n"
-				+ "      <div class=\"col-md-4 themed-grid-col\">Desarrollo Web</div>\r\n"
-				+ "      <div class=\"col-md-4 themed-grid-col\">9.5</div>      \r\n"
+				+ "      <div class=\"col-md-4 themed-grid-col\">"+asig+"</div>\r\n"
+				+ "      <div class=\"col-md-4 themed-grid-col\">"+jsonAsig.getString("nombre")+"</div>\r\n"
+				+ "      <div class=\"col-md-4 themed-grid-col\">"+nota+"</div>\r\n"
 				+ "    </div>\r\n"
 				+ "\r\n"
 				+ "    <h2 class=\"mt-4\">Información sobre la asignatura</h2>\r\n"
 				+ "    <ul>\r\n"
-				+ "      <li>Curso: "+curs+" "
-				+ "      <li>Cuatrimestre: "+cuatri+" "
-				+ "      <li>Créditos: "+cred+"</li>\r\n"
-				+ "      <li></li>\r\n"
+				+ "      <li>Curso:  " +jsonAsig.getInt("curso")+ "</li>"
+				+ "      <li>Cuatrimestre:  " +jsonAsig.getString("cuatrimestre")+ "</li>"
+				+ "      <li>Créditos: "  +jsonAsig.getDouble("creditos")+ "</li>\r\n"
 				+ "    </ul>\r\n"
 				+ "\r\n"
 				+ "    <footer class=\"pt-3 mt-4 text-body-secondary border-top\">\r\n"

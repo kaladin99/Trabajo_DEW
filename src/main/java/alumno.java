@@ -237,11 +237,10 @@ HttpSession sesion = request.getSession();
 		String asig1 = asignatura1.getString("nombre");
 		String asig2 = asignatura2.getString("nombre");
 		
-	
-		      
+
         
 		out.println("    <div class=\"p-5 mb-4 bg-body-tertiary rounded-3\" style=\"background-image: url('wallpaper.png'); background-size: cover;\">\r\n"
-			        + "      <div class=\"container-fluid py-5\">\r\n"
+			        + "      <div class=\"container-fluid py-5\">\r\n"	
 			        + "        <h1 class=\"display-5 fw-bold\">Notas OnLine. Asignaturas del/la alumn@ "+nombreApellido+"</h1>\r\n"
 			        + "        <p class=\"col-md-8 fs-4\">En esta página se muestran las asignaturas en las que estás matriculad@.</br>Al pulsar en una podrás acceder a tu calificación.</p>\r\n"
 			        + "      </div>\r\n"
