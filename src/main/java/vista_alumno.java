@@ -68,7 +68,12 @@ public class vista_alumno extends HttpServlet {
 		JSONArray asignaturasJSON = new JSONArray(asignaturas);
 		JSONObject asignatura0 = asignaturasJSON.getJSONObject(0);
 		out.println("<p> asignatura0: "+asignatura0+"</p>");
-	
+		
+		String asignatura_dew = fetchGet(request, "/asignaturas/DEW");
+		JSONObject asignatura_dewJson = new JSONObject(asignatura_dew);
+		
+		out.println("<p> asignaturaDEW_JSON: "+asignatura_dewJson.getString("nombre")+"</p>");
+
 		out.println("</body></html>");
 
 	}

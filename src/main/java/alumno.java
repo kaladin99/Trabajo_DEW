@@ -210,7 +210,7 @@ HttpSession sesion = request.getSession();
 		PrintWriter out = response.getWriter();
 		out.println(preHTML5);
 		
-		String asignaturas = fetchGet(request, "/asignaturas");
+		//String asignaturas = fetchGet(request, "/asignaturas");
 		
 		
 		String alumno = fetchGet(request, "/alumnos/"+sesion.getAttribute("dni"));
@@ -219,23 +219,27 @@ HttpSession sesion = request.getSession();
         String apellidos = nombreAlu.getString("apellidos");
         String nombreApellido = nombre+" "+apellidos;
         
-		JSONArray asignaturasJSON = new JSONArray(asignaturas);
+		String asignaturaAlumno = fetchGet(request, "/alumnos/"+sesion.getAttribute("dni")+"/asignaturas");
+		JSONArray asignaturasJSON = new JSONArray(asignaturaAlumno);
+		/*
 		JSONObject asignatura0 = asignaturasJSON.getJSONObject(0);
 		JSONObject asignatura1 = asignaturasJSON.getJSONObject(1);
 		JSONObject asignatura2 = asignaturasJSON.getJSONObject(2);
+		*/
 		
 		String res = "";
 		for(int i = 0; i< asignaturasJSON.length(); i++) {
-			String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("acronimo");
-			String nombre_asig = asignaturasJSON.getJSONObject(i).getString("nombre");
-			String linea = "<li><a href='./detalle_asignatura?nameAsignatura="+acronimo_asig+"'>"+nombre_asig+"</a></li>\r\n";
+			String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("asignatura");
+			//String nombre_asig = asignaturasJSON.getJSONObject(i).getString("nombre");
+			String linea = "<li><a href='./detalle_asignatura?nameAsignatura="+acronimo_asig+"'>"+acronimo_asig+"</a></li>\r\n";
 			//String linea = "<li>"+acronimo_asig+"</li>\r\n";
 			res += linea;
 		}
-		
+		/*
 		String asig0 = asignatura0.getString("nombre");
 		String asig1 = asignatura1.getString("nombre");
 		String asig2 = asignatura2.getString("nombre");
+		*/
 		
 
         
