@@ -141,4 +141,24 @@
     <servlet-name>alumno</servlet-name>
     <url-pattern>/alumno</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>lista_asignaturas</display-name>
+    <servlet-name>lista_asignaturas</servlet-name>
+    <servlet-class>lista_asignaturas</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>lista_asignaturas</servlet-name>
+    <url-pattern>/lista_asignaturas</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>detalle_asignatura</display-name>
+    <servlet-name>detalle_asignatura</servlet-name>
+    <servlet-class>detalle_asignatura</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>detalle_asignatura</servlet-name>
+    <url-pattern>/detalle_asignatura</url-pattern>
+  </servlet-mapping>
 </web-app>
