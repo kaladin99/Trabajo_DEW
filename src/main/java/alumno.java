@@ -211,7 +211,7 @@ HttpSession sesion = request.getSession();
 		out.println(preHTML5);
 		
 		String asignaturas = fetchGet(request, "/asignaturas");
-		out.println("<p> res.toString(): "+asignaturas+"</p>");
+		
 		
 		String alumno = fetchGet(request, "/alumnos/"+sesion.getAttribute("dni"));
         JSONObject nombreAlu = new JSONObject(alumno);        
@@ -219,10 +219,25 @@ HttpSession sesion = request.getSession();
         String apellidos = nombreAlu.getString("apellidos");
         String nombreApellido = nombre+" "+apellidos;
         
+		JSONArray asignaturasJSON = new JSONArray(asignaturas);
+		JSONObject asignatura0 = asignaturasJSON.getJSONObject(0);
+		JSONObject asignatura1 = asignaturasJSON.getJSONObject(1);
+		JSONObject asignatura2 = asignaturasJSON.getJSONObject(2);
 		
+		String res = "";
+		for(int i = 0; i< asignaturasJSON.length(); i++) {
+			String nombre_asig = asignaturasJSON.getJSONObject(i).getString("nombre");
+			String linea = "<li>"+nombre_asig+"</li>\r\n";
+			res += linea;
+		}
+		String asig0 = asignatura0.getString("nombre");
+		String asig1 = asignatura1.getString("nombre");
+		String asig2 = asignatura2.getString("nombre");
 		
-
-		 out.println("    <div class=\"p-5 mb-4 bg-body-tertiary rounded-3\" style=\"background-image: url('wallpaper.png'); background-size: cover;\">\r\n"
+	
+		      
+        
+		out.println("    <div class=\"p-5 mb-4 bg-body-tertiary rounded-3\" style=\"background-image: url('wallpaper.png'); background-size: cover;\">\r\n"
 			        + "      <div class=\"container-fluid py-5\">\r\n"
 			        + "        <h1 class=\"display-5 fw-bold\">Notas OnLine. Asignaturas del/la alumn@ "+nombreApellido+"</h1>\r\n"
 			        + "        <p class=\"col-md-8 fs-4\">En esta página se muestran las asignaturas en las que estás matriculad@.</br>Al pulsar en una podrás acceder a tu calificación.</p>\r\n"
@@ -230,13 +245,12 @@ HttpSession sesion = request.getSession();
 			        + "    </div>\r\n"
 			        + "    \r\n"
 			        + "\r\n"
+			        + ""
 			        + "    <div class=\"row align-items-md-stretch\">\r\n"
 			        + "      <div class=\"col-md-6\">\r\n"
 			        + "        <div class=\"h-100 p-5 text-bg-dark rounded-3\">\r\n"
 			        + "          <ul>\r\n"
-			        + "            <li>Desarrollo Web</li>\r\n"
-			        + "            <li>Integración de Aplicaciones</li>\r\n"
-			        + "            <li>Desarrollo Centrado en el Usuario</li>       \r\n"
+			        + res
 			        + "        </ul>\r\n"
 			        + "        </div>\r\n"
 			        + "      </div>\r\n"
@@ -268,11 +282,7 @@ HttpSession sesion = request.getSession();
 			        + "    </body>\r\n"
 			        + "</html>" );
 		
-		JSONArray asignaturasJSON = new JSONArray(asignaturas);
-		JSONObject asignatura0 = asignaturasJSON.getJSONObject(0);
-		out.println("<p> asignatura0: "+asignatura0+"</p>");
-	
-		out.println("</body></html>");
+
 	}
 
 	/**
