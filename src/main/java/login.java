@@ -48,7 +48,6 @@ public class login extends HttpServlet {
 		out.println(preHTML5);
 		HttpSession sesion = request.getSession();
 		String tomcatUser = request.getRemoteUser();
-		
 		if(sesion.getAttribute("key") == null) {
 			if (tomcatUser != null) {
 				sesion.setAttribute("dni", tomcatUser);
@@ -93,12 +92,10 @@ public class login extends HttpServlet {
 				} catch (Exception e) {
 					sesion.invalidate();
 					
-					//response.sendError(500, "Hubo problemas al recuperar la información." + e);
-					response.sendRedirect(request.getContextPath() + "/error_centro_educativo.html");
+					response.sendError(500, "Hubo problemas al recuperar la información." + e);
+					
 					return;
 				}	
-			} else {
-				response.sendRedirect(request.getContextPath() + "/error_autenticacion_tomcat.html");
 			}
 		
 		} else {
