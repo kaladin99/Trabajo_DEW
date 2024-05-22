@@ -6,7 +6,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,11 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.json.*;
 
+
 /**
  * Servlet implementation class vista_alumno
  */
 public class vista_alumno extends HttpServlet {
-	
+	/* Class para crear un map con usuarios del Centro Educativo */
+		
 	private String urlCE = "http://localhost:9090/CentroEducativo";
 	private static final long serialVersionUID = 1L;
 	private static final String preHTML5 = "<!DOCTYPE html>\n<html lang=\"es-es\">\n" +

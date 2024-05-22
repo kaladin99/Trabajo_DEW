@@ -2,18 +2,38 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 import org.json.*;
 
+
 /**
  * Servlet implementation class login
  */
 public class login extends HttpServlet {
-	private String[] users = new String[] {"12345678W"};
+	
+	class UserCE {
+		private String username;
+		private String password;
+	    public UserCE(String username, String password) {
+	       this.username = username;
+	       this.password = password;
+	    }
+	    
+	    public String getUsername() { return this.username; }
+	    public String getPassword() { return this.password; }
+	}
+	
+	Map<String, UserCE> users = new HashMap<String, UserCE>() {{
+        put("12345678W", new UserCE("12345678W", "123456"));
+
+	}};
+	
 	private static final long serialVersionUID = 1L;
 	private String urlCE = "http://localhost:9090/CentroEducativo";
 	private static final String preHTML5 = "<!DOCTYPE html>\n<html lang=\"es-es\">\n" +
@@ -50,8 +70,8 @@ public class login extends HttpServlet {
 		String tomcatUser = request.getRemoteUser();
 		if(sesion.getAttribute("key") == null) {
 			if (tomcatUser != null) {
-				sesion.setAttribute("dni", tomcatUser);
-				sesion.setAttribute("password", "123456");
+				sesion.setAttribute("dni", users.get(tomcatUser).getUsername());
+				sesion.setAttribute("password", users.get(tomcatUser).getPassword());
 				try {
 					
 					URL url = new URL(urlCE+"/login");
@@ -64,7 +84,7 @@ public class login extends HttpServlet {
 					
 					DataOutputStream wr = new DataOutputStream (
 							con.getOutputStream());
-		            wr.writeBytes("{\"dni\":\""+ tomcatUser +"\",\"password\":\""+"123456"+"\"}");
+		            wr.writeBytes("{\"dni\":\""+ sesion.getAttribute("dni") +"\",\"password\":\""+sesion.getAttribute("password")+"\"}");
 		            wr.close();
 		            
 		            List<String> cookies = con.getHeaderFields().get("Set-Cookie"); 
@@ -92,10 +112,12 @@ public class login extends HttpServlet {
 				} catch (Exception e) {
 					sesion.invalidate();
 					
-					response.sendError(500, "Hubo problemas al recuperar la información." + e);
-					
+					//response.sendError(500, "Hubo problemas al recuperar la información." + e);
+					response.sendRedirect(request.getContextPath() + "/error_centro_educativo.html");
 					return;
 				}	
+			} else {
+				response.sendRedirect(request.getContextPath() + "/error_autenticacion_tomcat.html");
 			}
 		
 		} else {
