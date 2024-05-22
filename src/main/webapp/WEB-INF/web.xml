@@ -131,4 +131,14 @@
     <servlet-name>cat_api</servlet-name>
     <url-pattern>/cat_api</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>alumno</display-name>
+    <servlet-name>alumno</servlet-name>
+    <servlet-class>alumno</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>alumno</servlet-name>
+    <url-pattern>/alumno</url-pattern>
+  </servlet-mapping>
 </web-app>
