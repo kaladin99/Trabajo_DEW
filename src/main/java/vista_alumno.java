@@ -19,6 +19,7 @@ import org.json.*;
  * Servlet implementation class vista_alumno
  */
 public class vista_alumno extends HttpServlet {
+	
 	private String urlCE = "http://localhost:9090/CentroEducativo";
 	private static final long serialVersionUID = 1L;
 	private static final String preHTML5 = "<!DOCTYPE html>\n<html lang=\"es-es\">\n" +
@@ -38,14 +39,21 @@ public class vista_alumno extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sesion = request.getSession();
+		
+		
+		if(sesion.getAttribute("key") == null) {
+			response.sendRedirect(request.getContextPath());
+			return;
+		}
+		
+		String key = sesion.getAttribute("key").toString();
+		
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8"); 
 		PrintWriter out = response.getWriter();
 		out.println(preHTML5);
 		
-		HttpSession sesion = request.getSession();
-		String key = sesion.getAttribute("key").toString();
-	
 		String asignaturas = fetchGet(request, "/asignaturas");
 		out.println("<p> res.toString(): "+asignaturas+"</p>");
 		
