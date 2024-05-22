@@ -226,10 +226,13 @@ HttpSession sesion = request.getSession();
 		
 		String res = "";
 		for(int i = 0; i< asignaturasJSON.length(); i++) {
+			String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("acronimo");
 			String nombre_asig = asignaturasJSON.getJSONObject(i).getString("nombre");
-			String linea = "<li>"+nombre_asig+"</li>\r\n";
+			String linea = "<li><a href='./detalle_asignatura?nameAsignatura="+acronimo_asig+"'>"+nombre_asig+"</a></li>\r\n";
+			//String linea = "<li>"+acronimo_asig+"</li>\r\n";
 			res += linea;
 		}
+		
 		String asig0 = asignatura0.getString("nombre");
 		String asig1 = asignatura1.getString("nombre");
 		String asig2 = asignatura2.getString("nombre");
@@ -250,7 +253,7 @@ HttpSession sesion = request.getSession();
 			        + "      <div class=\"col-md-6\">\r\n"
 			        + "        <div class=\"h-100 p-5 text-bg-dark rounded-3\">\r\n"
 			        + "          <ul>\r\n"
-			        + res
+			        + 					res
 			        + "        </ul>\r\n"
 			        + "        </div>\r\n"
 			        + "      </div>\r\n"
