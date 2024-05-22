@@ -134,7 +134,7 @@ public class login extends HttpServlet {
 		if (request.isUserInRole("rolpro")) {
 			//nothing yet
 		} else if (request.isUserInRole("rolalu")) {
-			response.sendRedirect(request.getContextPath() + "/vista_alumno");
+			response.sendRedirect(request.getContextPath() + "/alumno");
 		}
 		
 		
