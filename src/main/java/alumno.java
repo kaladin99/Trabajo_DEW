@@ -245,8 +245,8 @@ HttpSession sesion = request.getSession();
         
 		out.println("    <div class=\"p-5 mb-4 bg-body-tertiary rounded-3\" style=\"background-image: url('wallpaper.png'); background-size: cover;\">\r\n"
 			        + "      <div class=\"container-fluid py-5\">\r\n"	
-			        + "        <h1 class=\"display-5 fw-bold\">Notas OnLine. Asignaturas del/la alumn@ "+nombreApellido+"</h1>\r\n"
-			        + "        <p class=\"col-md-8 fs-4\">En esta página se muestran las asignaturas en las que estás matriculad@.</br>Al pulsar en una podrás acceder a tu calificación.</p>\r\n"
+			        + "        <h1 class=\"display-5 fw-bold\" style=\"color: white;\"!important >Notas OnLine. Asignaturas del/la alumn@ "+nombreApellido+"</h1>\r\n"
+			        + "        <p class=\"col-md-8 fs-4\" style=\"color: white;\"!important>En esta página se muestran las asignaturas en las que estás matriculad@.</br>Al pulsar en una podrás acceder a tu calificación.</p>\r\n"
 			        + "      </div>\r\n"
 			        + "    </div>\r\n"
 			        + "    \r\n"
