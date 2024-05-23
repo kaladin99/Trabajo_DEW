@@ -33,7 +33,23 @@ public class login extends HttpServlet {
 	/* Este hashmap contiene todos los usuarios disponibles del centro eductativo y su relacion de credenciales entre tomcat y centro educativo */
 	Map<String, UserCE> users = new HashMap<String, UserCE>() {{
         put("12345678W", new UserCE("12345678W", "123456"));
-
+        put("23456733H", new UserCE("23456733H", "123456"));
+        put("10293756L", new UserCE("10293756L", "123456"));
+        put("06374291A", new UserCE("06374291A", "123456"));
+        put("65748923M", new UserCE("65748923M", "123456"));
+        put("23456387R", new UserCE("23456387R", "123456"));
+        put("34567891F", new UserCE("34567891F", "123456"));
+        put("93847525G", new UserCE("93847525G", "123456"));
+        put("37264096W", new UserCE("37264096W", "123456"));
+		put("Pepe", new UserCE("12345678W", "123456"));
+        put("Maria", new UserCE("23456387R", "123456"));
+        put("Miguel", new UserCE("34567891F", "123456"));
+        put("Laura", new UserCE("93847525G", "123456"));
+        put("Minerva", new UserCE("37264096W", "123456"));
+        put("Ramon", new UserCE("23456733H", "123456"));
+        put("Pedro", new UserCE("10293756L", "123456"));
+        put("Manoli", new UserCE("06374291A", "123456"));
+        put("Joan", new UserCE("65748923M", "123456"));
 	}};
 	
 	private static final long serialVersionUID = 1L;
@@ -119,7 +135,7 @@ public class login extends HttpServlet {
 		
 		/* Comprobamos cual es el rol del usuario autenticado en tomcat y lo redirigimos al servlet correspondiente */
 		if (request.isUserInRole("rolpro")) {
-			//nothing yet
+			response.sendRedirect(request.getContextPath() + "/profesor");
 		} else if (request.isUserInRole("rolalu")) {
 			response.sendRedirect(request.getContextPath() + "/alumno");
 		}

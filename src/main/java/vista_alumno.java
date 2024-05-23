@@ -22,8 +22,7 @@ import org.json.*;
  * Servlet implementation class vista_alumno
  */
 public class vista_alumno extends HttpServlet {
-	/* Class para crear un map con usuarios del Centro Educativo */
-		
+	
 	private String urlCE = "http://localhost:9090/CentroEducativo";
 	private static final long serialVersionUID = 1L;
 	private static final String preHTML5 = "<!DOCTYPE html>\n<html lang=\"es-es\">\n" +
@@ -44,7 +43,6 @@ public class vista_alumno extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
-		
 		
 		if(sesion.getAttribute("key") == null) {
 			response.sendRedirect(request.getContextPath());

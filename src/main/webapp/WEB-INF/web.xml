@@ -161,4 +161,14 @@
     <servlet-name>detalle_asignatura</servlet-name>
     <url-pattern>/detalle_asignatura</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>profesor</display-name>
+    <servlet-name>profesor</servlet-name>
+    <servlet-class>profesor</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>profesor</servlet-name>
+    <url-pattern>/profesor</url-pattern>
+  </servlet-mapping>
 </web-app>
