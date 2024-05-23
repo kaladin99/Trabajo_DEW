@@ -38,8 +38,8 @@ public class detalle_asignatura extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	HttpSession sesion = request.getSession();
-		
+		HttpSession sesion = request.getSession();
+		String asig = request.getParameter("nameAsignatura");
 		
 		if(sesion.getAttribute("key") == null) {
 			response.sendRedirect(request.getContextPath());
@@ -48,13 +48,33 @@ public class detalle_asignatura extends HttpServlet {
 		
 		String key = sesion.getAttribute("key").toString();
 		
+		//Comprobar que el alumno está matriculado en esa asignatura ========================================================
+		String asignaturasAlumno = fetchGet(request, "/alumnos/"+sesion.getAttribute("dni")+"/asignaturas");
+		
+		JSONArray asignaturasJSON = new JSONArray(asignaturasAlumno);
+		String resultado = "<p>";
+		boolean estaMatriculado = false;
+		for(int i = 0; i< asignaturasJSON.length(); i++) {
+			String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("asignatura");
+			resultado += "Asig: "+asig + "  JSON_Asignatura: "+acronimo_asig +"\n";
+			if (asig.equals(acronimo_asig)) {
+				estaMatriculado = true;
+			}
+		}
+		resultado += "</p>";
+		if (estaMatriculado == false) {
+			response.sendRedirect(request.getContextPath() + "/not_found_error.html");
+			return;
+		}
+		
+		// ==================================================================================================================
+		
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8"); 
 		PrintWriter out = response.getWriter();
 		
 		
 		//Recoger que el acronimo de la asignatura que  se ha clicado
-		String asig = request.getParameter("nameAsignatura");
 		
 		//Obtener toda la información de la asigntura
 		String resAsig = fetchGet(request, "/asignaturas/" + asig);
@@ -262,6 +282,7 @@ public class detalle_asignatura extends HttpServlet {
 				+ "    </div>\r\n"
 				+ "\r\n"
 				+ "    <h2 class=\"mt-4\">Información sobre la asignatura</h2>\r\n"
+				+ resultado
 				+ "    <ul>\r\n"
 				+ "      <li>Curso:  " +jsonAsig.getInt("curso")+ "</li>"
 				+ "      <li>Cuatrimestre:  " +jsonAsig.getString("cuatrimestre")+ "</li>"
