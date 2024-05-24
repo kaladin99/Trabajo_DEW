@@ -282,7 +282,7 @@ public class detalle_asignatura extends HttpServlet {
 				+ "    </div>\r\n"
 				+ "\r\n"
 				+ "    <h2 class=\"mt-4\">Información sobre la asignatura</h2>\r\n"
-				+ resultado
+				
 				+ "    <ul>\r\n"
 				+ "      <li>Curso:  " +jsonAsig.getInt("curso")+ "</li>"
 				+ "      <li>Cuatrimestre:  " +jsonAsig.getString("cuatrimestre")+ "</li>"
