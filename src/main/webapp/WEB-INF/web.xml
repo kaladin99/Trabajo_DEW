@@ -191,4 +191,14 @@
     <servlet-name>alumnos_de_asignatura</servlet-name>
     <url-pattern>/alumnos_de_asignatura</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>evaluar</display-name>
+    <servlet-name>evaluar</servlet-name>
+    <servlet-class>evaluar</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>evaluar</servlet-name>
+    <url-pattern>/evaluar</url-pattern>
+  </servlet-mapping>
 </web-app>
