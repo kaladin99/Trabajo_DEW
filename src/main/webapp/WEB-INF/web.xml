@@ -171,4 +171,24 @@
     <servlet-name>profesor</servlet-name>
     <url-pattern>/profesor</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>evaluar_alumno_pruebas</display-name>
+    <servlet-name>evaluar_alumno_pruebas</servlet-name>
+    <servlet-class>evaluar_alumno_pruebas</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>evaluar_alumno_pruebas</servlet-name>
+    <url-pattern>/evaluar_alumno_pruebas</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>alumnos_de_asignatura</display-name>
+    <servlet-name>alumnos_de_asignatura</servlet-name>
+    <servlet-class>alumnos_de_asignatura</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>alumnos_de_asignatura</servlet-name>
+    <url-pattern>/alumnos_de_asignatura</url-pattern>
+  </servlet-mapping>
 </web-app>
