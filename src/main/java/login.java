@@ -46,10 +46,10 @@ public class login extends HttpServlet {
         put("Miguel", new UserCE("34567891F", "123456"));
         put("Laura", new UserCE("93847525G", "123456"));
         put("Minerva", new UserCE("37264096W", "123456"));
-        put("Ramon", new UserCE("23456733H", "123456"));
-        put("Pedro", new UserCE("10293756L", "123456"));
-        put("Manoli", new UserCE("06374291A", "123456"));
-        put("Joan", new UserCE("65748923M", "123456"));
+        put("Ramon", new UserCE("23456733H", "123456")); // profesor
+        put("Pedro", new UserCE("10293756L", "123456"));// profesor
+        put("Manoli", new UserCE("06374291A", "123456")); // profesor
+        put("Joan", new UserCE("65748923M", "123456"));//profesor 
 	}};
 	
 	private static final long serialVersionUID = 1L;
