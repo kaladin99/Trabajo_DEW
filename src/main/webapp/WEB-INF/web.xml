@@ -201,4 +201,14 @@
     <servlet-name>evaluar</servlet-name>
     <url-pattern>/evaluar</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>cambiar_nota</display-name>
+    <servlet-name>cambiar_nota</servlet-name>
+    <servlet-class>cambiar_nota</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cambiar_nota</servlet-name>
+    <url-pattern>/cambiar_nota</url-pattern>
+  </servlet-mapping>
 </web-app>

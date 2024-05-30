@@ -26,7 +26,14 @@ public class evaluar extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String asig = request.getParameter("nameAsignatura");
+		String asig = request.getParameter("asig");
+		
+		if (asig == null) {
+			response.sendRedirect(request.getContextPath());
+			return;
+		}
+		
+		//FALTA COMPROBAR SI EL QUE ACCEDE A ESTE SERVLET ES PROFESOR Y ADEMÁS IMPARTA ESA ASIGNATURA
 		
 		String preHTML5 = "<!doctype html>\r\n"
 				+ "<html>"
@@ -44,10 +51,12 @@ public class evaluar extends HttpServlet {
 				+ "<p id=\"alumno_nombre\"></p>"
 				+ "<div class=\"arrows_container\">"
 				+ "<button id=\"btn_left\">LEFT</button>"
-				+ "<span id=\"nota\"></span>"
+				//+ "<span id=\"nota\"></span>"
+				+ "<input type=\"number\" id=\"nota\" min=\"0\" max=\"10\" step=\".01\"/>"
 				+ "<button id=\"btn_right\">RIGHT</button>"
 				+ "</div>"
 				+ "</div>"
+				+ "<input type=\"hidden\" id=\"asignatura\" value=\"" + asig + "\"/>"
 				+ "</body>"
 				+ "</html>";
 				
