@@ -255,16 +255,6 @@ public class profesor extends HttpServlet {
     			String res = "";
     			
     			for(int i = 0; i< asignaturasJSON.length(); i++) {
-<<<<<<< HEAD
-    				String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("acronimo");
-    				String nombre_asig = asignaturasJSON.getJSONObject(i).getString("nombre");
-    				double media = notaMedia(request,acronimo_asig);
-    				
-    				String linea = "<li><a href='./detalle_asignatura_profesor?acronimo_asig="+acronimo_asig+"'>"+nombre_asig+"</a> "+ "Nota media: "+media+"</li>\r\n";
-    				//String linea = "<li>"+acronimo_asig+"</li>\r\n"
-    				res += linea;
-    			}
-=======
     				  String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("acronimo");
     				  String nombre_asig = asignaturasJSON.getJSONObject(i).getString("nombre");
     				  double media = notaMedia(request,acronimo_asig);
@@ -275,8 +265,6 @@ public class profesor extends HttpServlet {
     				              + "</div>\n";
     				  res += linea;
     				}
-
->>>>>>> branch 'master' of https://github.com/kaladin99/Trabajo_DEW.git
     			
     			//
     			

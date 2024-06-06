@@ -145,18 +145,23 @@ public class detalle_alumno extends HttpServlet {
 		response.setCharacterEncoding("UTF-8"); 
 		PrintWriter out = response.getWriter();
 		out.println(HTML);
-		//String alumno = fetchGet(request, "/alumnos/"+sesion.getAttribute("dni"));
-		//JSONObject nombreAlu = new JSONObject(alumno);        
-        //String nombre = nombreAlu.getString("nombre");
-        //String apellidos = nombreAlu.getString("apellidos");
-        //String nombreApellido = nombre+" "+apellidos;
-        //String asignaturaAlumno = fetchGet(request, "/alumnos/"+sesion.getAttribute("dni")+"/asignaturas");
-		//JSONArray asignaturasJSON = new JSONArray(asignaturaAlumno);
+		  String alumno = fetchGet(request, "/alumnos/"+request.getParameter("dni"));
+		  JSONObject nombreAlu = new JSONObject(alumno);        
+          String nombre = nombreAlu.getString("nombre");
+          String apellidos = nombreAlu.getString("apellidos");
+          String asignaturaAlumno = fetchGet(request, "/alumnos/"+request.getParameter("dni")+"/asignaturas");
+		  JSONArray asignaturasJSON = new JSONArray(asignaturaAlumno);
 		String res="";
-		//for(int i = 0; i< asignaturasJSON.length(); i++) {
-			//String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("asignatura");
-			//res+= acronimo_asig + " ";
-		//}
+		int nota = 0;
+		  for(int i = 0; i< asignaturasJSON.length(); i++) {
+			 String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("asignatura");
+			 String notas_JSON = asignaturasJSON.getJSONObject(i).getString("nota");
+			 nota += notas_JSON.equals("") ? 0 : Integer.parseInt(notas_JSON);
+			 	
+			 
+			 res+= acronimo_asig + " ";
+		}
+		int media = nota / asignaturasJSON.length();
 		out.println("<body>\n"
 				+ "    <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"d-none\">\n"
 				+ "      <symbol id=\"check2\" viewBox=\"0 0 16 16\">\n"
@@ -220,7 +225,7 @@ public class detalle_alumno extends HttpServlet {
 				+ "\n"
 				+ "    <div class=\"p-5 mb-4 bg-body-tertiary rounded-3\">\n"
 				+ "      <div class=\"container-fluid py-5\">\n"
-				+ "        <h1 class=\"display-5 fw-bold\">Apellidos, nombre (dni)</h1>\n"
+				+ "        <h1 class=\"display-5 fw-bold\"> "+ apellidos + ", " + nombre + " (" + sesion.getAttribute("dni") + ") </br> Nota media: " + media +"</h1>\n"
 			
 				
 				+ "      </div>\n"
@@ -234,7 +239,7 @@ public class detalle_alumno extends HttpServlet {
 				+ "      </div>\n"
 				+ "      <div class=\"col-md-6\">\n"
 				+ "        <div class=\"h-100 p-5 bg-body-tertiary border rounded-3\">\n"
-				+ "          <h2>[Matriculad@ en: asignaturas]</h2>\n"
+				+ "          <h2>Matriculad@ en: "+res+" " +" </h2>\n"
 				+ "          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet luctus venenatis lectus magna. Mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. In fermentum posuere urna nec tincidunt praesent semper feugiat. Tincidunt praesent semper feugiat nibh sed. Tellus integer feugiat scelerisque varius morbi enim. Dolor magna eget est lorem ipsum dolor sit. Sed augue lacus viverra vitae congue eu. Libero nunc consequat interdum varius sit. Mi tempus imperdiet nulla malesuada pellentesque. Consectetur adipiscing elit duis tristique sollicitudin nibh sit amet commodo. Ac orci phasellus egestas tellus. Quis imperdiet massa tincidunt nunc pulvinar sapien et ligula. Eget felis eget nunc lobortis mattis. Neque laoreet suspendisse interdum consectetur. Enim sed faucibus turpis in eu mi bibendum. Pharetra magna ac placerat vestibulum lectus mauris ultrices eros in.</p>\n"
 				+ "        </div>\n"
 				+ "      </div>\n"
