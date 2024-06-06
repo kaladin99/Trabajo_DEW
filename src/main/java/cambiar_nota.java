@@ -81,7 +81,7 @@ public class cambiar_nota extends HttpServlet {
 
         String dni = jsonObject.getString("dni");
         String asignatura = jsonObject.getString("asignatura");
-        String nota = jsonObject.getString("asignatura");
+        String nota = 		jsonObject.getString("nota");
 
         
 		
@@ -95,20 +95,46 @@ public class cambiar_nota extends HttpServlet {
 			con.setDoInput(true);
 		    String cookie = (String) sesion.getAttribute("cookies");
 		    con.setRequestProperty("Cookie", cookie.split(";", 2)[0]);
-			con.setRequestProperty("content-type", "application/json");
+		    con.setRequestProperty("Content-Type", "application/json");
 			
-			//Le añadimos el cuerpo al mensaje mediante un JSON (En este caso se ha realizado el json de forma literal)
-			DataOutputStream wr = new DataOutputStream (con.getOutputStream());
-            wr.writeBytes(nota);
-            wr.close();
+		    try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+		        wr.writeBytes(nota);
+		        wr.flush();
+		    }
             
-            /* Leemos el mensaje que hemos obtenido del centro educativo, deberia ser la KEY */
-            PrintWriter out = response.getWriter();
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
+            int responseCode = con.getResponseCode();
             jsonObject.put("key", sesion.getAttribute("key").toString());
             jsonObject.put("uri", uri);
-            out.print(jsonObject);
+            jsonObject.put("cookie", cookie.split(";", 2)[0]);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            PrintWriter out = response.getWriter();
+            jsonObject.put("response code", responseCode);
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Procesar la respuesta
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+                    String inputLine;
+                    StringBuilder responseContent = new StringBuilder();
+                    while ((inputLine = in.readLine()) != null) {
+                        responseContent.append(inputLine);
+                    }           
+                    jsonObject.put("response", responseContent);
+                    out.print(jsonObject);
+                }
+            } else {
+            	// Leer el mensaje de error del servidor
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getErrorStream()))) {
+                    String inputLine;
+                    StringBuilder errorContent = new StringBuilder();
+                    while ((inputLine = in.readLine()) != null) {
+                        errorContent.append(inputLine);
+                    }
+                    System.out.println("Error Content: " + errorContent.toString());
+                    jsonObject.put("response", errorContent);
+                }
+                
+            	out.print(jsonObject);
+            }
             
             con.disconnect();
 		} catch (Exception e) {

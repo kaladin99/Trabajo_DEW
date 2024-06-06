@@ -10,6 +10,7 @@ let params = new URLSearchParams(document.location.search);
 let asig = params.get("asig");
 let modificado = false
 let disable_buttons = (array, current) => {
+	modificado = false;
 	$("#btn_left").prop("disabled",false)
 	$("#btn_right").prop("disabled",false)
 	if (current == 0) $("#btn_left").prop("disabled",true)
@@ -46,24 +47,16 @@ $(document).ready(function() {
 	
 	
 	$('#btn_left').click(() => {
-		if (modificado) cambiarNota($("#nota").val())
-		console.log(alumnos)
-		console.log("Current alumno antes:",current_alumno)
-		console.log("CLICK LEFT")
+		if (modificado) cambiarNota($("#nota").val());
 		current_alumno--
-		console.log("Current alumno despues:",current_alumno)
 		disable_buttons(alumnos,current_alumno)
 		$('#alumno_nombre').text(alumnos[current_alumno]["nombre"] + " " + alumnos[current_alumno]["apellidos"])
 		$('#nota').val(alumnos[current_alumno]["nota"])
 	});
 	
 	$('#btn_right').click(() => {
-		if (modificado) cambiarNota($("#nota").val())
-		console.log(alumnos)
-		console.log("Current alumno antes:",current_alumno)
-		console.log("CLICK RIGHT")
+		if (modificado) cambiarNota($("#nota").val());
 		current_alumno++
-		console.log("Current alumno despues:",current_alumno)
 		disable_buttons(alumnos,current_alumno)
 		$('#alumno_nombre').text(alumnos[current_alumno]["nombre"] + " " + alumnos[current_alumno]["apellidos"])
 		$('#nota').val(alumnos[current_alumno]["nota"])
