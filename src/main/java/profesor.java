@@ -45,87 +45,94 @@ public class profesor extends HttpServlet {
 			+ "    \r\n"
 			+ "\r\n"
 			+ "    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@docsearch/css@3\">\r\n"
+			
 			+ "\r\n"
 			+ "<link href=\"./assets/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\r\n"
 			+ "\r\n"
-			+ "    <style>\r\n"
-			+ "      .bd-placeholder-img {\r\n"
-			+ "        font-size: 1.125rem;\r\n"
-			+ "        text-anchor: middle;\r\n"
-			+ "        -webkit-user-select: none;\r\n"
-			+ "        -moz-user-select: none;\r\n"
-			+ "        user-select: none;\r\n"
-			+ "      }\r\n"
-			+ "\r\n"
-			+ "      @media (min-width: 768px) {\r\n"
-			+ "        .bd-placeholder-img-lg {\r\n"
-			+ "          font-size: 3.5rem;\r\n"
-			+ "        }\r\n"
-			+ "      }\r\n"
-			+ "\r\n"
-			+ "      .b-example-divider {\r\n"
-			+ "        width: 100%;\r\n"
-			+ "        height: 3rem;\r\n"
-			+ "        background-color: rgba(0, 0, 0, .1);\r\n"
-			+ "        border: solid rgba(0, 0, 0, .15);\r\n"
-			+ "        border-width: 1px 0;\r\n"
-			+ "        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);\r\n"
-			+ "      }\r\n"
-			+ "\r\n"
-			+ "      .b-example-vr {\r\n"
-			+ "        flex-shrink: 0;\r\n"
-			+ "        width: 1.5rem;\r\n"
-			+ "        height: 100vh;\r\n"
-			+ "      }\r\n"
-			+ "\r\n"
-			+ "      .bi {\r\n"
-			+ "        vertical-align: -.125em;\r\n"
-			+ "        fill: currentColor;\r\n"
-			+ "      }\r\n"
-			+ "\r\n"
-			+ "      .nav-scroller {\r\n"
-			+ "        position: relative;\r\n"
-			+ "        z-index: 2;\r\n"
-			+ "        height: 2.75rem;\r\n"
-			+ "        overflow-y: hidden;\r\n"
-			+ "      }\r\n"
-			+ "\r\n"
-			+ "      .nav-scroller .nav {\r\n"
-			+ "        display: flex;\r\n"
-			+ "        flex-wrap: nowrap;\r\n"
-			+ "        padding-bottom: 1rem;\r\n"
-			+ "        margin-top: -1px;\r\n"
-			+ "        overflow-x: auto;\r\n"
-			+ "        text-align: center;\r\n"
-			+ "        white-space: nowrap;\r\n"
-			+ "        -webkit-overflow-scrolling: touch;\r\n"
-			+ "      }\r\n"
-			+ "\r\n"
-			+ "      .btn-bd-primary {\r\n"
-			+ "        --bd-violet-bg: #712cf9;\r\n"
-			+ "        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;\r\n"
-			+ "\r\n"
-			+ "        --bs-btn-font-weight: 600;\r\n"
-			+ "        --bs-btn-color: var(--bs-white);\r\n"
-			+ "        --bs-btn-bg: var(--bd-violet-bg);\r\n"
-			+ "        --bs-btn-border-color: var(--bd-violet-bg);\r\n"
-			+ "        --bs-btn-hover-color: var(--bs-white);\r\n"
-			+ "        --bs-btn-hover-bg: #6528e0;\r\n"
-			+ "        --bs-btn-hover-border-color: #6528e0;\r\n"
-			+ "        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);\r\n"
-			+ "        --bs-btn-active-color: var(--bs-btn-hover-color);\r\n"
-			+ "        --bs-btn-active-bg: #5a23c8;\r\n"
-			+ "        --bs-btn-active-border-color: #5a23c8;\r\n"
-			+ "      }\r\n"
-			+ "\r\n"
-			+ "      .bd-mode-toggle {\r\n"
-			+ "        z-index: 1500;\r\n"
-			+ "      }\r\n"
-			+ "\r\n"
-			+ "      .bd-mode-toggle .dropdown-menu .active .bi {\r\n"
-			+ "        display: block !important;\r\n"
-			+ "      }\r\n"
-			+ "    </style>\r\n"
+				+ "    <style>\r\n"
+				+ "      .bd-placeholder-img {\r\n"
+				+ "        font-size: 1.125rem;\r\n"
+				+ "        text-anchor: middle;\r\n"
+				+ "        -webkit-user-select: none;\r\n"
+				+ "        -moz-user-select: none;\r\n"
+				+ "        user-select: none;\r\n"
+				+ "      }\r\n"
+				+ "\r\n"
+				+ "      @media (min-width: 768px) {\r\n"
+				+ "        .bd-placeholder-img-lg {\r\n"
+				+ "          font-size: 3.5rem;\r\n"
+				+ "        }\r\n"
+				+ "      }\r\n"
+				+ "\r\n"
+				+ "      .b-example-divider {\r\n"
+				+ "        width: 100%;\r\n"
+				+ "        height: 3rem;\r\n"
+				+ "        background-color: rgba(0, 0, 0, .1);\r\n"
+				+ "        border: solid rgba(0, 0, 0, .15);\r\n"
+				+ "        border-width: 1px 0;\r\n"
+				+ "        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);\r\n"
+				+ "      }\r\n"
+				+ "\r\n"
+				+ "      .b-example-vr {\r\n"
+				+ "        flex-shrink: 0;\r\n"
+				+ "        width: 1.5rem;\r\n"
+				+ "        height: 100vh;\r\n"
+				+ "      }\r\n"
+				+ "\r\n"
+				+ "      .bi {\r\n"
+				+ "        vertical-align: -.125em;\r\n"
+				+ "        fill: currentColor;\r\n"
+				+ "      }\r\n"
+				+ "\r\n"
+				+ "      .nav-scroller {\r\n"
+				+ "        position: relative;\r\n"
+				+ "        z-index: 2;\r\n"
+				+ "        height: 2.75rem;\r\n"
+				+ "        overflow-y: hidden;\r\n"
+				+ "      }\r\n"
+				+ "\r\n"
+				+ "      .nav-scroller .nav {\r\n"
+				+ "        display: flex;\r\n"
+				+ "        flex-wrap: nowrap;\r\n"
+				+ "        padding-bottom: 1rem;\r\n"
+				+ "        margin-top: -1px;\r\n"
+				+ "        overflow-x: auto;\r\n"
+				+ "        text-align: center;\r\n"
+				+ "        white-space: nowrap;\r\n"
+				+ "        -webkit-overflow-scrolling: touch;\r\n"
+				+ "      }\r\n"
+				+ "\r\n"
+				+ "      .btn-bd-primary {\r\n"
+				+ "        --bd-violet-bg: #712cf9;\r\n"
+				+ "        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;\r\n"
+				+ "\r\n"
+				+ "        --bs-btn-font-weight: 600;\r\n"
+				+ "        --bs-btn-color: var(--bs-white);\r\n"
+				+ "        --bs-btn-bg: var(--bd-violet-bg);\r\n"
+				+ "        --bs-btn-border-color: var(--bd-violet-bg);\r\n"
+				+ "        --bs-btn-hover-color: var(--bs-white);\r\n"
+				+ "        --bs-btn-hover-bg: #6528e0;\r\n"
+				+ "        --bs-btn-hover-border-color: #6528e0;\r\n"
+				+ "        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);\r\n"
+				+ "        --bs-btn-active-color: var(--bs-btn-hover-color);\r\n"
+				+ "        --bs-btn-active-bg: #5a23c8;\r\n"
+				+ "        --bs-btn-active-border-color: #5a23c8;\r\n"
+				+ "      }\r\n"
+				+ "\r\n"
+				+ "      .bd-mode-toggle {\r\n"
+				+ "        z-index: 1500;\r\n"
+				+ "      }\r\n"
+				+ "\r\n"
+				+ "      .bd-mode-toggle .dropdown-menu .active .bi {\r\n"
+				+ "        display: block !important;\r\n"
+				+ "      }\r\n"
+				+ "\r\n"
+				+ "      a {\r\n"
+				+ "        color: white;\r\n"        
+				+ "      }\r\n"
+				+ "\r\n"
+				+ "    </style>\r\n"
+				
 			+ "\r\n"
 			+ "    \r\n"
 			+ "  </head>\r\n"
@@ -185,8 +192,8 @@ public class profesor extends HttpServlet {
 			+ "<main>\r\n"
 			+ "  <div class=\"container py-4\">\r\n"
 			+ "    <header class=\"pb-3 mb-4 border-bottom\">\r\n"
-			+ "      <a href=\"/\" class=\"d-flex align-items-center text-body-emphasis text-decoration-none\">\r\n"
-			+ "        <span class=\"fs-4\">DEW ~ 2023/2024</span>\r\n"
+			+ "      <a href='./' class=\"d-flex align-items-center text-body-emphasis text-decoration-none\">\r\n"
+			+ "        <span class=\"fs-4\">DEW ~ 2023/2024 </span>\r\n"
 			+ "      </a>\r\n"
 			+ "    </header>\r\n";
     public profesor() {
@@ -206,6 +213,13 @@ public class profesor extends HttpServlet {
     				return;
     			}
     			
+    			
+    			String prof = fetchGet(request, "/profesores/"+sesion.getAttribute("dni"));
+    			System.out.println(" profesor"+  prof);
+    			if (prof == "") {
+    				response.sendRedirect(request.getContextPath());
+    				return;
+    			}
     			//String key = sesion.getAttribute("key").toString();
     			
     			response.setContentType("text/html");
@@ -239,7 +253,9 @@ public class profesor extends HttpServlet {
     			
     			//System.out.println(media);
     			String res = "";
+    			
     			for(int i = 0; i< asignaturasJSON.length(); i++) {
+<<<<<<< HEAD
     				String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("acronimo");
     				String nombre_asig = asignaturasJSON.getJSONObject(i).getString("nombre");
     				double media = notaMedia(request,acronimo_asig);
@@ -248,6 +264,19 @@ public class profesor extends HttpServlet {
     				//String linea = "<li>"+acronimo_asig+"</li>\r\n"
     				res += linea;
     			}
+=======
+    				  String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("acronimo");
+    				  String nombre_asig = asignaturasJSON.getJSONObject(i).getString("nombre");
+    				  double media = notaMedia(request,acronimo_asig);
+    				  
+    				  String linea = "<div class=\"row mb-3 text-center\">\n"
+    				              + "  <div class=\"col-md-4 themed-grid-col\"><a href='./detalle_asignatura?nameAsignatura="+nombre_asig+"'>"+nombre_asig+"</a></div>\n"
+    				              + "  <div class=\"col-md-4 themed-grid-col\">Nota media: "+media+"</div>\n"
+    				              + "</div>\n";
+    				  res += linea;
+    				}
+
+>>>>>>> branch 'master' of https://github.com/kaladin99/Trabajo_DEW.git
     			
     			//
     			
@@ -272,14 +301,16 @@ public class profesor extends HttpServlet {
     				        + "    <div class=\"row align-items-md-stretch\">\r\n"
     				        + "      <div class=\"col-md-6\">\r\n"
     				        + "        <div class=\"h-100 p-5 text-bg-dark rounded-3\">\r\n"
-    				        + "          <ul>\r\n"
+
+    				        + "          <h3>Tus asignaturas</h3>"
+
     				        + 					res  
-    				        + "        </ul>\r\n"
+    				        + "\r\n"
     				        + "        </div>\r\n"
     				        + "      </div>\r\n"
     				        + "      <div class=\"col-md-6\">\r\n"
     				        + "        <div class=\"h-100 p-5 bg-body-tertiary border rounded-3\">\r\n"
-    				        + "\r\n"
+    				        
     				        + "          <h3>Grupo 3ti12_g1</h3>\r\n"
     				        + "          <ol>\r\n"
     				        + "              <li>Isabel Vallés Bertomeu</li>\r\n"
