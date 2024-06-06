@@ -45,6 +45,7 @@ public class profesor extends HttpServlet {
 			+ "    \r\n"
 			+ "\r\n"
 			+ "    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@docsearch/css@3\">\r\n"
+			
 			+ "\r\n"
 			+ "<link href=\"./assets/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\r\n"
 			+ "\r\n"
@@ -127,8 +128,7 @@ public class profesor extends HttpServlet {
 				+ "      }\r\n"
 				+ "\r\n"
 				+ "      a {\r\n"
-				+ "        color: white;\r\n" 
-				+ "        text-decoration: none;\r\n"  /* Elimina el subrayado */
+				+ "        color: white;\r\n"        
 				+ "      }\r\n"
 				+ "\r\n"
 				+ "    </style>\r\n"
@@ -253,15 +253,19 @@ public class profesor extends HttpServlet {
     			
     			//System.out.println(media);
     			String res = "";
+    			
     			for(int i = 0; i< asignaturasJSON.length(); i++) {
-    				String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("acronimo");
-    				String nombre_asig = asignaturasJSON.getJSONObject(i).getString("nombre");
-    				double media = notaMedia(request,acronimo_asig);
-    				
-    				String linea = "<a href='./detalle_asignatura?nameAsignatura="+nombre_asig+"'>"+nombre_asig+"</a> "+ "Nota media: "+media+"\r\n<br>";
-    				//String linea = "<li>"+acronimo_asig+"</li>\r\n"
-    				res += linea;
-    			}
+    				  String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("acronimo");
+    				  String nombre_asig = asignaturasJSON.getJSONObject(i).getString("nombre");
+    				  double media = notaMedia(request,acronimo_asig);
+    				  
+    				  String linea = "<div class=\"row mb-3 text-center\">\n"
+    				              + "  <div class=\"col-md-4 themed-grid-col\"><a href='./detalle_asignatura?nameAsignatura="+nombre_asig+"'>"+nombre_asig+"</a></div>\n"
+    				              + "  <div class=\"col-md-4 themed-grid-col\">Nota media: "+media+"</div>\n"
+    				              + "</div>\n";
+    				  res += linea;
+    				}
+
     			
     			//
     			
@@ -286,14 +290,16 @@ public class profesor extends HttpServlet {
     				        + "    <div class=\"row align-items-md-stretch\">\r\n"
     				        + "      <div class=\"col-md-6\">\r\n"
     				        + "        <div class=\"h-100 p-5 text-bg-dark rounded-3\">\r\n"
-    				        + "          <ul>\r\n"
+
+    				        + "          <h3>Tus asignaturas</h3>"
+
     				        + 					res  
-    				        + "        </ul>\r\n"
+    				        + "\r\n"
     				        + "        </div>\r\n"
     				        + "      </div>\r\n"
     				        + "      <div class=\"col-md-6\">\r\n"
     				        + "        <div class=\"h-100 p-5 bg-body-tertiary border rounded-3\">\r\n"
-    				        + "\r\n"
+    				        
     				        + "          <h3>Grupo 3ti12_g1</h3>\r\n"
     				        + "          <ol>\r\n"
     				        + "              <li>Isabel Vallés Bertomeu</li>\r\n"
