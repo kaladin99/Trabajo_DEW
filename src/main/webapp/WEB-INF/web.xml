@@ -226,7 +226,7 @@
     <display-name>cerrar_sesion</display-name>
     <servlet-name>cerrar_sesion</servlet-name>
     <servlet-class>cerrar_sesion</servlet-class>
-  </servlet> 
+  </servlet>
   <servlet-mapping>
     <servlet-name>cerrar_sesion</servlet-name>
     <url-pattern>/cerrar_sesion</url-pattern>
@@ -241,4 +241,13 @@
     <servlet-name>prueba_nota_media</servlet-name>
     <url-pattern>/prueba_nota_media</url-pattern>
   </servlet-mapping>
+  <filter>
+    <display-name>log_requests</display-name>
+    <filter-name>log_requests</filter-name>
+    <filter-class>log_requests</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>log_requests</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>
