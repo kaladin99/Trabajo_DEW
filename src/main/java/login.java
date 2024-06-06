@@ -21,9 +21,11 @@ public class login extends HttpServlet {
 	class UserCE {
 		private String username;
 		private String password;
+		private String rol ;
 	    public UserCE(String username, String password) {
 	       this.username = username;
 	       this.password = password;
+	       
 	    }
 	    
 	    public String getUsername() { return this.username; }
@@ -31,12 +33,12 @@ public class login extends HttpServlet {
 	}
 	 
 	/* Este hashmap contiene todos los usuarios disponibles del centro eductativo y su relacion de credenciales entre tomcat y centro educativo */
-	Map<String, UserCE> users = new HashMap<String, UserCE>() {{
-        put("12345678W", new UserCE("12345678W", "123456"));
-        put("23456733H", new UserCE("23456733H", "123456"));
-        put("10293756L", new UserCE("10293756L", "123456"));
-        put("06374291A", new UserCE("06374291A", "123456"));
-        put("65748923M", new UserCE("65748923M", "123456"));
+	 Map<String, UserCE> users = new HashMap<String, UserCE>() {{
+        put("12345678W", new UserCE("12345678W", "123456")); // DCU ,DEW, IAP
+        put("23456733H", new UserCE("23456733H", "123456"));//profesor DEW
+        put("10293756L", new UserCE("10293756L", "123456"));//profesor IAP , DCU
+        put("06374291A", new UserCE("06374291A", "123456"));//profesor
+        put("65748923M", new UserCE("65748923M", "123456"));//profesor
         put("23456387R", new UserCE("23456387R", "123456"));
         put("34567891F", new UserCE("34567891F", "123456"));
         put("93847525G", new UserCE("93847525G", "123456"));
@@ -81,6 +83,8 @@ public class login extends HttpServlet {
 		
 		/* Obtenemos la sesion actual, si no existe la crea*/
 		HttpSession sesion = request.getSession();
+		
+
 		String tomcatUser = request.getRemoteUser(); //Nombre de usuario autenticado mediante tomcat (El alert user/password)
 		if(sesion.getAttribute("key") == null) { //En caso de que la sesión que hemos obtenido no tenga key, significa que no la habiamos creado nosotros y es nueva
 			if (tomcatUser != null) {

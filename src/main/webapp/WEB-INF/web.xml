@@ -211,4 +211,24 @@
     <servlet-name>cambiar_nota</servlet-name>
     <url-pattern>/cambiar_nota</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>cerrar_sesion</display-name>
+    <servlet-name>cerrar_sesion</servlet-name>
+    <servlet-class>cerrar_sesion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cerrar_sesion</servlet-name>
+    <url-pattern>/cerrar_sesion</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>prueba_nota_media</display-name>
+    <servlet-name>prueba_nota_media</servlet-name>
+    <servlet-class>prueba_nota_media</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>prueba_nota_media</servlet-name>
+    <url-pattern>/prueba_nota_media</url-pattern>
+  </servlet-mapping>
 </web-app>
