@@ -221,4 +221,34 @@
     <servlet-name>certificado</servlet-name>
     <url-pattern>/certificado</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <description></description>
+    <display-name>detalle_alumno</display-name>
+    <servlet-name>detalle_alumno</servlet-name>
+    <servlet-class>detalle_alumno</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>detalle_alumno</servlet-name>
+    <url-pattern>/detalle_alumno</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>cerrar_sesion</display-name>
+    <servlet-name>cerrar_sesion</servlet-name>
+    <servlet-class>cerrar_sesion</servlet-class>
+  </servlet> 
+  <servlet-mapping>
+    <servlet-name>cerrar_sesion</servlet-name>
+    <url-pattern>/cerrar_sesion</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>prueba_nota_media</display-name>
+    <servlet-name>prueba_nota_media</servlet-name>
+    <servlet-class>prueba_nota_media</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>prueba_nota_media</servlet-name>
+    <url-pattern>/prueba_nota_media</url-pattern>
+  </servlet-mapping>
 </web-app>
