@@ -23,7 +23,7 @@ public class detalle_alumno extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String urlCE = "http://localhost:9090/CentroEducativo";
 	private String HTML= "<!doctype html>\n"
-			+ "<html lang=\"en\" data-bs-theme=\"auto\">\n"
+			+ "< html lang=\"en\" data-bs-theme=\"auto\">\n"
 			+ "  <head><script src=\"./assets/js/color-modes.js\"></script>\n"
 			+ "\n"
 			+ "    <meta charset=\"utf-8\">\n"
