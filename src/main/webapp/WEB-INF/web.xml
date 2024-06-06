@@ -213,7 +213,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-<<<<<<< HEAD
     <display-name>detalle_alumno</display-name>
     <servlet-name>detalle_alumno</servlet-name>
     <servlet-class>detalle_alumno</servlet-class>
@@ -221,11 +220,13 @@
   <servlet-mapping>
     <servlet-name>detalle_alumno</servlet-name>
     <url-pattern>/detalle_alumno</url-pattern>
-=======
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>cerrar_sesion</display-name>
     <servlet-name>cerrar_sesion</servlet-name>
     <servlet-class>cerrar_sesion</servlet-class>
-  </servlet>
+  </servlet> 
   <servlet-mapping>
     <servlet-name>cerrar_sesion</servlet-name>
     <url-pattern>/cerrar_sesion</url-pattern>
@@ -239,6 +240,5 @@
   <servlet-mapping>
     <servlet-name>prueba_nota_media</servlet-name>
     <url-pattern>/prueba_nota_media</url-pattern>
->>>>>>> branch 'master' of https://github.com/kaladin99/Trabajo_DEW.git
   </servlet-mapping>
 </web-app>
