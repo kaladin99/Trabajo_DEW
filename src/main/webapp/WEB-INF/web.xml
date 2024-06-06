@@ -211,4 +211,14 @@
     <servlet-name>cambiar_nota</servlet-name>
     <url-pattern>/cambiar_nota</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>certificado</display-name>
+    <servlet-name>certificado</servlet-name>
+    <servlet-class>certificado</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>certificado</servlet-name>
+    <url-pattern>/certificado</url-pattern>
+  </servlet-mapping>
 </web-app>
