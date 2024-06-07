@@ -141,6 +141,12 @@ public class detalle_alumno extends HttpServlet {
 			response.sendRedirect(request.getContextPath());
 			return;
 		}
+		String prof = fetchGet(request, "/profesores/"+sesion.getAttribute("dni"));
+		
+		if (prof == "") {
+			response.sendRedirect(request.getContextPath());
+			return;
+		}
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8"); 
 		PrintWriter out = response.getWriter();
@@ -218,7 +224,7 @@ public class detalle_alumno extends HttpServlet {
 				+ "<main>\n"
 				+ "  <div class=\"container py-4\">\n"
 				+ "    <header class=\"pb-3 mb-4 border-bottom\">\n"
-				+ "      <a href=\"/\" class=\"d-flex align-items-center text-body-emphasis text-decoration-none\">\n"
+				+ "      <a href='./profesor' class=\"d-flex align-items-center text-body-emphasis text-decoration-none\">\n"
 				+ "        <span class=\"fs-4\">DEW ~ 2023/2024</span>\n"
 				+ "      </a>\n"
 				+ "    </header>\n"
