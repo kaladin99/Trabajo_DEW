@@ -55,6 +55,20 @@ public class evaluar extends HttpServlet {
 		        "<link href=\"./assets/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\n" +
 		        "\n" +
 		        "    <style>\n" +
+		        "      button#btn_right svg {\n" +
+		        "           width: 75%;\n" +
+		        "      		height: 100%;\n" +
+		        "      }\n" +
+		        "      button#btn_left svg {\n" +
+		        "           width: 75%;\n" +
+		        "      		height: 100%;\n" +
+		        "      }\n" +
+		        "      button#btn_right {\n" +
+		        "           padding: 0;\n" +
+		        "      }\n" +
+		        "      button#btn_left {\n" +
+		        "           padding: 0;\n" +
+		        "      }\n" +
 		        "      .bd-placeholder-img {\n" +
 		        "        font-size: 1.125rem;\n" +
 		        "        text-anchor: middle;\n" +
@@ -238,9 +252,19 @@ public class evaluar extends HttpServlet {
 		        "              <img id=\"foto_alumno_base64\" src=\"\" alt=\"foto del alumno\"/>\n" +
 		        "              <!--<p id=\"alumno_nombre\"></p>-->\n" +
 		        "              <div class=\"arrows_container\">\n" +
-		        "                  <button id=\"btn_left\" type=\"button\" class=\"w-100 btn btn-lg btn-primary\">L</button>\n" +
+		        "                  <button id=\"btn_left\" type=\"button\" class=\"w-100 btn btn-lg btn-primary\">"+
+		        "						<svg width=\"100\" height=\"50\" viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\">"+
+		        "							<polygon points=\"40,10 10,25 40,40\" style=\"fill: black;\" />"+
+		        "							<line x1=\"10\" y1=\"25\" x2=\"90\" y2=\"25\" style=\"stroke: black; stroke-width: 2;\" />"+
+		        "						</svg>"+
+		        "                  </button>\n" +
 		        "                  <input type=\"number\" id=\"nota\" min=\"0\" max=\"10\" step=\".01\"/>\n" +
-		        "                  <button id=\"btn_right\" type=\"button\" class=\"w-100 btn btn-lg btn-primary\">R</button>\n" +
+		        "                  <button id=\"btn_right\" type=\"button\" class=\"w-100 btn btn-lg btn-primary\">"+
+		        "						<svg width=\"100\" height=\"50\" viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\">"+
+			    "    						<polygon points=\"60,10 90,25 60,40\" style=\"fill: black;\" />"+
+			    "    						<line x1=\"10\" y1=\"25\" x2=\"90\" y2=\"25\" style=\"stroke: black; stroke-width: 2;\" />"+
+			    "   					</svg>"+
+		        "				   </button>\n" +
 		        "              </div>\n" +
 		        "            </div>\n" +
 		        "            <input type=\"hidden\" id=\"asignatura\" value=\"asig\"/>\n" +

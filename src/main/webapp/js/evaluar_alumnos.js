@@ -26,7 +26,7 @@ let cambiarNota = (nota) => {
 	    contentType: "application/json; charset=utf-8",
         success: (res) => {
 	        console.log(res);
-	        showToast('Nota del alumno ' + alumnos[current_alumno]["nombre"] + ' cambiada correctamente.', 'success');
+	        showToast('Nota del cambiada correctamente.', 'success');
 	    },
 	    error: (jqXHR, textStatus, errorThrown) => {
 	        console.error('Error:', textStatus, errorThrown);
