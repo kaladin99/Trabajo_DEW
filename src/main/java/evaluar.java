@@ -38,6 +38,11 @@ public class evaluar extends HttpServlet {
     	HttpSession sesion = request.getSession();
 		String asig = request.getParameter("asig");
 
+		if (asig == null) {
+			response.sendRedirect(request.getContextPath() + "/not_found_error.html");
+			return;
+		}
+		
     	boolean isProfesorValido = false;
     	
     	if(sesion.getAttribute("key") == null) {
@@ -64,10 +69,19 @@ public class evaluar extends HttpServlet {
 		}
 		
 		if (isProfesorValido == false) {
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath() + "/not_found_error.html");
 			return;
 		}
 
+
+		if (asig == null) {
+			response.sendRedirect(request.getContextPath());
+			return;
+		}
+		
+		//FALTA COMPROBAR SI EL QUE ACCEDE A ESTE SERVLET ES PROFESOR Y ADEMÁS IMPARTA ESA ASIGNATURA
+		
+				
 		if (asig == null) {
 			response.sendRedirect(request.getContextPath());
 			return;
