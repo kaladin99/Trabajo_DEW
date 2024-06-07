@@ -25,7 +25,6 @@ let cambiarNota = (nota) => {
 	    data: JSON.stringify({dni:alumnos[current_alumno]["dni"],nota:nota,asignatura:asig}),
 	    contentType: "application/json; charset=utf-8",
         success: (res) => {
-	        console.log(res);
 	        showToast('Nota del cambiada correctamente.', 'success');
 	    },
 	    error: (jqXHR, textStatus, errorThrown) => {
@@ -67,13 +66,11 @@ let showToast = (message, type='success') => {
  }
  
 $(document).ready(function() {
-	console.log("INPUT VALUE",$("#asignatura").val())
-	console.log("ASIG JS VALUE",asig)
+	let guardado = false
 	$.ajax({
 		 url: 'http://dew-jrevvil-2324.dsicv.upv.es:8080/Trabajo-NOL/alumnos_de_asignatura?asig='+asig,
 		 dataType: 'json',
 		 success: (data) => {
-			console.log(data)
 			alumnos = data
 			$('#alumno_nombre').text(data[current_alumno]["nombre"] + " " + data[current_alumno]["apellidos"])
 			$('#nota').val(data[current_alumno]["nota"])
@@ -83,17 +80,14 @@ $(document).ready(function() {
 	})
 	
 	$('#btn_left').click(() => {
-		//if (modificado) cambiarNota($("#nota").val());
 		current_alumno--
 		disable_buttons(alumnos,current_alumno)
 		$('#alumno_nombre').text(alumnos[current_alumno]["nombre"] + " " + alumnos[current_alumno]["apellidos"])
 		$('#nota').val(alumnos[current_alumno]["nota"])
 		$('#foto_alumno_base64').attr("src", "data:image/png;base64, "+alumnos[current_alumno]["img"]);
-
 	});
 	
 	$('#btn_right').click(() => {
-		//if (modificado) cambiarNota($("#nota").val());
 		current_alumno++
 		disable_buttons(alumnos,current_alumno)
 		$('#alumno_nombre').text(alumnos[current_alumno]["nombre"] + " " + alumnos[current_alumno]["apellidos"])
@@ -103,17 +97,22 @@ $(document).ready(function() {
 	});
 	
 	$("#nota").on( "change", function() {
-		cambiarNota($("#nota").val())
+		if (guardado == false) {
+				cambiarNota($("#nota").val())
+				guardado = true;
+		}
 	  	modificado = true
 	});
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	$('#nota').keypress(function() {
+		guardado = false;
+		//SI EN 5 SEGUNDOS NO CLICA FUERA DEL INPUT PARA QUE SE ACTIVE EL EVENTO ONCHANGE, SE GUARDA AUTOMATICAMENTE
+	    setTimeout(()=> {
+			if (guardado == false) {
+				cambiarNota($("#nota").val())
+				guardado = true;
+			}
+		}, 5000)
+	});
 	
 })

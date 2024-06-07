@@ -1,19 +1,28 @@
 
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Servlet implementation class evaluar
  */
 public class evaluar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private String urlCE = "http://localhost:9090/CentroEducativo";
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -26,8 +35,39 @@ public class evaluar extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	HttpSession sesion = request.getSession();
 		String asig = request.getParameter("asig");
+
+    	boolean isProfesorValido = false;
+    	
+    	if(sesion.getAttribute("key") == null) {
+			response.sendRedirect(request.getContextPath());
+			return;
+		}
+    	
+    	String profesores = fetchGet(request, "/profesores");
+		JSONArray profesoresJSON= new JSONArray(profesores);
+    	
+		for( int i = 0; i<profesoresJSON.length(); i++){
+			String profesor_dni = profesoresJSON.getJSONObject(i).getString("dni");
+			if (profesor_dni.equals(sesion.getAttribute("dni"))) {
+				String asignaturasProfesor = fetchGet(request, "/profesores/" + profesor_dni + "/asignaturas");
+				JSONArray asignaturasProfesorJSON = new JSONArray(asignaturasProfesor);
+				for( int x = 0; x<asignaturasProfesorJSON.length(); x++){
+					String acronimo_asignatura = asignaturasProfesorJSON.getJSONObject(i).getString("acronimo");
+					if (acronimo_asignatura.equals(asig)) {
+						isProfesorValido = true;
+					}
+				}
+				
+			}
+		}
 		
+		if (isProfesorValido == false) {
+			response.sendRedirect(request.getContextPath());
+			return;
+		}
+
 		if (asig == null) {
 			response.sendRedirect(request.getContextPath());
 			return;
@@ -251,7 +291,7 @@ public class evaluar extends HttpServlet {
 		        "            <div class=\"tarjeta\">\n" +
 		        "              <img id=\"foto_alumno_base64\" src=\"\" alt=\"foto del alumno\"/>\n" +
 		        "              <!--<p id=\"alumno_nombre\"></p>-->\n" +
-		        "              <div class=\"arrows_container\">\n" +
+		        "              <div class=\"arrows_container\" style=\"margin-top: 20px;\">\n" +
 		        "                  <button id=\"btn_left\" type=\"button\" class=\"w-100 btn btn-lg btn-primary\">"+
 		        "						<svg width=\"100\" height=\"50\" viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\">"+
 		        "							<polygon points=\"40,10 10,25 40,40\" style=\"fill: black;\" />"+
@@ -309,5 +349,43 @@ public class evaluar extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
+	private String fetchGet(HttpServletRequest request, String url) {
+		HttpSession sesion = request.getSession();
+		String key = sesion.getAttribute("key").toString();
+		
+		try {
+			URL obj = new URL(urlCE+url+"?key="+key);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			con.setRequestMethod("GET");
+		    con.setDoInput(true);
+		    String cookie = (String) sesion.getAttribute("cookies");
+		    con.setRequestProperty("Cookie", cookie.split(";", 2)[0]);
+			
+			int responseCode = con.getResponseCode();
+			//System.out.println("GET Response Code :: " + responseCode);
+			if (responseCode == HttpURLConnection.HTTP_OK) { // success
+				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				String inputLine;
+				StringBuffer res = new StringBuffer();
 
+				while ((inputLine = in.readLine()) != null) {
+					res.append(inputLine);
+				}
+				in.close();
+				return res.toString();
+				//out.println("<p> res.toString(): "+res.toString()+"</p>");
+				// print result
+				//System.out.println(res.toString());
+			} else {
+				//out.println("<p> LA PETICION GET NO HA FUNCIONADO</p>");
+				System.out.println("GET request did not work.");
+				return "";
+			}
+		} catch (Exception e) {
+			//out.println("<p> exception " +e +"</p>");ç
+			System.out.println("GET request did not work." +e);
+			return "";
+		}
+	}
 }
