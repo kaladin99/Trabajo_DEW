@@ -1,11 +1,14 @@
 
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -54,8 +57,14 @@ public class alumnos_de_asignatura extends HttpServlet {
 			String dni = alumnosDeAsignaturaJSON.getJSONObject(i).getString("alumno");
 			String alumno = fetchGet(request, "/alumnos/" + dni);
 			JSONObject alumnoJSON = new JSONObject(alumno);
+			
+			//OBTENER FOTO EN BASE64 DEL ALUMNO
+			File file = new File(getServletContext().getRealPath("/assets/fotos/" + dni + ".pngb64"));
+            byte[] fileContent = Files.readAllBytes(file.toPath());
+            String fileContentString = new String(fileContent, StandardCharsets.UTF_8);
+            
 			alumnoJSON.put("nota", alumnosDeAsignaturaJSON.getJSONObject(i).getString("nota"));
-			alumnoJSON.put("img", "");
+			alumnoJSON.put("img", fileContentString);
 			jsonResponse.put(alumnoJSON);
 		}
 		
