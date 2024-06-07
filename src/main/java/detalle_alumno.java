@@ -1,11 +1,14 @@
 
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -159,6 +162,9 @@ public class detalle_alumno extends HttpServlet {
           String apellidos = nombreAlu.getString("apellidos");
           String asignaturaAlumno = fetchGet(request, "/alumnos/"+request.getParameter("dni")+"/asignaturas");
 		  JSONArray asignaturasJSON = new JSONArray(asignaturaAlumno);
+		  File file = new File(getServletContext().getRealPath("/assets/fotos/" + request.getParameter("dni") + ".pngb64"));
+          byte[] fileContent = Files.readAllBytes(file.toPath());
+          String fileContentString = new String(fileContent, StandardCharsets.UTF_8);
 		String res="";
 		int nota = 0;
 		  for(int i = 0; i< asignaturasJSON.length(); i++) {
@@ -233,7 +239,7 @@ public class detalle_alumno extends HttpServlet {
 				+ "\n"
 				+ "    <div class=\"p-5 mb-4 bg-body-tertiary rounded-3\">\n"
 				+ "      <div class=\"container-fluid py-5\">\n"
-				+ "        <h1 class=\"display-5 fw-bold\"> "+ apellidos + ", " + nombre + " (" + sesion.getAttribute("dni") + ") </br> Nota media: " + media +"</h1>\n"
+				+ "        <h1 class=\"display-5 fw-bold\"> "+ apellidos + ", " + nombre + " (" + request.getParameter("dni") + ") </br> Nota media: " + media +"</h1>\n"
 			
 				
 				+ "      </div>\n"
@@ -242,7 +248,7 @@ public class detalle_alumno extends HttpServlet {
 				+ "    <div class=\"row align-items-md-stretch\">\n"
 				+ "      <div class=\"col-md-6\">\n"
 				+ "        <div class=\"h-100 p-5 text-bg-dark rounded-3\">\n"
-				+ "			<img src=\"fotos/h/1.png\" alt=\"Ejemplo de imagen\" height=\"400\" width=\"400\">"
+				+ "			<img src=\"data:image/png;base64, "+fileContentString+ "\" alt=\"Ejemplo de imagen\" height=\"400\" width=\"400\">"
 				+ "        </div>\n"
 				+ "      </div>\n"
 				+ "      <div class=\"col-md-6\">\n"
