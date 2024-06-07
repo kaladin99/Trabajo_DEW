@@ -147,8 +147,6 @@ public class evaluar extends HttpServlet {
 		        "    <!--<link rel=\"stylesheet\" type=\"text/css\" href=\"./css/evaluar_ajax.css\">-->\n" +
 		        "\n" +
 		        "    \n" +
-		        "    <!-- Custom styles for this template -->\n" +
-		        "    <link href=\"pricing.css\" rel=\"stylesheet\">\n" +
 		        "  </head>\n" +
 		        "  <body>\n" +
 		        "    <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"d-none\">\n" +

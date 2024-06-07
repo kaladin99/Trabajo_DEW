@@ -260,7 +260,7 @@ public class profesor extends HttpServlet {
     				  double media = notaMedia(request,acronimo_asig);
     				  
     				  String linea = "<div class=\"row mb-3 text-center\">\n"
-    				              + "  <div class=\"col-md-4 themed-grid-col\"><a href='./detalle_asignatura?nameAsignatura="+nombre_asig+"'>"+nombre_asig+"</a></div>\n"
+    				              + "  <div class=\"col-md-4 themed-grid-col\"><a href='./detalle_asignatura_profesor?acronimo_asig="+acronimo_asig+"'>"+nombre_asig+"</a></div>\n"
     				              + "  <div class=\"col-md-4 themed-grid-col\">Nota media: "+media+"</div>\n"
     				              + "</div>\n";
     				  res += linea;
