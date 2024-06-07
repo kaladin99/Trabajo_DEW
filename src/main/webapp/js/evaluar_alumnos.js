@@ -44,10 +44,8 @@ $(document).ready(function() {
 		 }
 	})
 	
-	
-	
 	$('#btn_left').click(() => {
-		if (modificado) cambiarNota($("#nota").val());
+		//if (modificado) cambiarNota($("#nota").val());
 		current_alumno--
 		disable_buttons(alumnos,current_alumno)
 		$('#alumno_nombre').text(alumnos[current_alumno]["nombre"] + " " + alumnos[current_alumno]["apellidos"])
@@ -55,7 +53,7 @@ $(document).ready(function() {
 	});
 	
 	$('#btn_right').click(() => {
-		if (modificado) cambiarNota($("#nota").val());
+		//if (modificado) cambiarNota($("#nota").val());
 		current_alumno++
 		disable_buttons(alumnos,current_alumno)
 		$('#alumno_nombre').text(alumnos[current_alumno]["nombre"] + " " + alumnos[current_alumno]["apellidos"])
@@ -63,7 +61,10 @@ $(document).ready(function() {
 	});
 	
 	$("#nota").on( "change", function() {
-	  modificado = true
+		toastr.success('La nota del alumno se ha actualizado', 'Nota actualizada')
+		cambiarNota($("#nota").val())
+		console.log("CAMBIA INPUT NOTA")
+	  	modificado = true
 	});
 	
 	

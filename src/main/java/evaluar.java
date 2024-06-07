@@ -52,6 +52,8 @@ public class evaluar extends HttpServlet {
 		        "\n" +
 		        "    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@docsearch/css@3\">\n" +
 		        "\n" +
+		        "    <link rel=\"stylesheet\" href=\"./css/toastr.min.css\">\n" +
+		        "\n" +
 		        "<link href=\"./assets/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\n" +
 		        "\n" +
 		        "    <style>\n" +
@@ -140,6 +142,7 @@ public class evaluar extends HttpServlet {
 		        "    \n" +
 		        "    <title>Evaluar</title>\n" +
 		        "    <script src=\"https://code.jquery.com/jquery-3.7.1.min.js\"></script>\n" +
+		        "    <script src=\"./js/toastr.min.js\"></script>\n" +
 		        "    <script src=\"./js/evaluar_alumnos.js\"></script>\n" +
 		        "    <!--<link rel=\"stylesheet\" type=\"text/css\" href=\"./css/evaluar_ajax.css\">-->\n" +
 		        "\n" +
