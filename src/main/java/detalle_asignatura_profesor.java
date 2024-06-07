@@ -338,9 +338,7 @@ public class detalle_asignatura_profesor extends HttpServlet {
     				        + "    <div class=\"row align-items-md-stretch\">\r\n"
     				        + "      <div class=\"col-md-6\">\r\n"
     				        + "        <div class=\"h-100 p-5 text-bg-dark rounded-3\">\r\n"
-    				        +"          <form action=\"/evaluar?asig="+asignaturaAcronimo+"\" method=\"get\">\n"
-    				        + "  		  <input class=\"btn btn-primary w-100 py-2\" type=\"submit\" value=\"Evaluar todos\"/>"
-    				        + "	        </form>"
+    				        +"          <a href='evaluar?asig="+asignaturaAcronimo +"'class='btn btn-primary w-100 py-2' >Evaluar a todos</a>"
     				        + "          <ul>\r\n"
     				        + 					res  
     				        + "        </ul>\r\n"
