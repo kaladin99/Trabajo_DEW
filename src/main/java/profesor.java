@@ -289,7 +289,6 @@ public class profesor extends HttpServlet {
     				        + "    <div class=\"row align-items-md-stretch\">\r\n"
     				        + "      <div class=\"col-md-6\">\r\n"
     				        + "        <div class=\"h-100 p-5 text-bg-dark rounded-3\">\r\n"
-
     				        + "          <h3>Tus asignaturas</h3>"
 
     				        + 					res  

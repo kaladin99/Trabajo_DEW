@@ -139,6 +139,9 @@ public class detalle_alumno extends HttpServlet {
 	 */   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
+		String dniProf = (String) sesion.getAttribute("dni");
+		String dniAlum = request.getParameter("dni") ;
+		boolean imparteAsignatura = false;
 		
 		if(sesion.getAttribute("key") == null) {
 			response.sendRedirect(request.getContextPath());
@@ -150,6 +153,34 @@ public class detalle_alumno extends HttpServlet {
 			response.sendRedirect(request.getContextPath());
 			return;
 		}
+		
+		//Si no es un profesor de una asignatura a la que este matriculado el alumno te manda a /profesor
+		
+		//se obtiene las asignaturas a las que esta matriculado el alumno
+		String asignaturaAlumno = fetchGet(request, "/alumnos/"+request.getParameter("dni")+"/asignaturas");
+		JSONArray asignaturaAlumnoJSON = new JSONArray(asignaturaAlumno);
+		
+		//se obtienen las asignaturas que imparte el profesor
+		String asigDeProf = fetchGet(request, "/profesores/"+dniProf+"/asignaturas");
+		JSONArray asigDeProfJSON = new JSONArray(asigDeProf);
+		
+		//se recorre el json en para ver si el profesor de dniProf imparte docencia en la asignatura asignaturaAcronimo
+		for(int i = 0; i < asigDeProfJSON.length(); i++) {
+			String acronimoProfAux = asigDeProfJSON.getJSONObject(i).getString("acronimo");
+			for(int j = 0; j < asignaturaAlumnoJSON.length(); j++) {
+				String acronimoAlumAux = asignaturaAlumnoJSON.getJSONObject(j).getString("asignatura");
+				if(acronimoProfAux.equals(acronimoAlumAux)) {
+					imparteAsignatura = true;
+					break;
+				}
+			}
+		}
+		
+		if (!imparteAsignatura) {
+			response.sendRedirect(request.getContextPath() + "/profesor");
+			return;
+		}
+		
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8"); 
 		PrintWriter out = response.getWriter();
@@ -160,7 +191,7 @@ public class detalle_alumno extends HttpServlet {
 		  JSONObject nombreAlu = new JSONObject(alumno);        
           String nombre = nombreAlu.getString("nombre");
           String apellidos = nombreAlu.getString("apellidos");
-          String asignaturaAlumno = fetchGet(request, "/alumnos/"+request.getParameter("dni")+"/asignaturas");
+          
 		  JSONArray asignaturasJSON = new JSONArray(asignaturaAlumno);
 		  File file = new File(getServletContext().getRealPath("/assets/fotos/" + request.getParameter("dni") + ".pngb64"));
           byte[] fileContent = Files.readAllBytes(file.toPath());
