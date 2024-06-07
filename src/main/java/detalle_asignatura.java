@@ -261,7 +261,7 @@ public class detalle_asignatura extends HttpServlet {
 				+ "<main>\r\n"
 				+ "  <div class=\"container py-4\">\r\n"
 				+ "    <header class=\"pb-3 mb-4 border-bottom\">\r\n"
-				+ "      <a href=\"/\" class=\"d-flex align-items-center text-body-emphasis text-decoration-none\">\r\n"
+				+ "      <a href='./alumno' class=\"d-flex align-items-center text-body-emphasis text-decoration-none\">\r\n"
 				+ "        <span class=\"fs-4\">DEW ~ 2023/2024</span>\r\n"
 				+ "      </a>\r\n"
 				+ "    </header>\r\n"
