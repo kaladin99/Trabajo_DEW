@@ -178,7 +178,7 @@ public class alumno extends HttpServlet {
 			+ "<main>\r\n"
 			+ "  <div class=\"container py-4\">\r\n"
 			+ "    <header class=\"pb-3 mb-4 border-bottom\">\r\n"
-			+ "      <a href=\"/\" class=\"d-flex align-items-center text-body-emphasis text-decoration-none\">\r\n"
+			+ "      <a href='./' class=\"d-flex align-items-center text-body-emphasis text-decoration-none\">\r\n"
 			+ "        <span class=\"fs-4\">DEW ~ 2023/2024</span>\r\n"
 			+ "      </a>\r\n"
 			+ "    </header>\r\n";
@@ -199,6 +199,12 @@ HttpSession sesion = request.getSession();
 		
 		
 		if(sesion.getAttribute("key") == null) {
+			response.sendRedirect(request.getContextPath());
+			return;
+		}
+		String alumno2 = fetchGet(request, "/alumnos/"+sesion.getAttribute("dni"));
+		//System.out.println(" alumno"+  alumno2);
+		if (alumno2 == "") {
 			response.sendRedirect(request.getContextPath());
 			return;
 		}
@@ -242,6 +248,10 @@ HttpSession sesion = request.getSession();
 		*/
 		
 
+		if(asignaturasJSON.length() > 0) {
+			String l = "<li><a href='./certificado'>Imprimir certificado académico</a></li>\r\n";
+			res += l;
+		}
         
 		out.println("    <div class=\"p-5 mb-4 bg-body-tertiary rounded-3\" style=\"background-image: url('wallpaper.png'); background-size: cover;\">\r\n"
 			        + "      <div class=\"container-fluid py-5\">\r\n"	

@@ -44,15 +44,13 @@ public class evaluar extends HttpServlet {
 		        "    <meta name=\"description\" content=\"\">\n" +
 		        "    <meta name=\"author\" content=\"Mark Otto, Jacob Thornton, and Bootstrap contributors\">\n" +
 		        "    <meta name=\"generator\" content=\"Hugo 0.122.0\">\n" +
-		        "    <title>Pricing example · Bootstrap v5.3</title>\n" +
+		        "    <title>Evaluar alumnos</title>\n" +
 		        "\n" +
 		        "    <link rel=\"canonical\" href=\"https://getbootstrap.com/docs/5.3/examples/pricing/\">\n" +
 		        "\n" +
 		        "    \n" +
 		        "\n" +
 		        "    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@docsearch/css@3\">\n" +
-		        "\n" +
-		        "    <link rel=\"stylesheet\" href=\"./css/toastr.min.css\">\n" +
 		        "\n" +
 		        "<link href=\"./assets/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\n" +
 		        "\n" +
@@ -142,15 +140,13 @@ public class evaluar extends HttpServlet {
 		        "    \n" +
 		        "    <title>Evaluar</title>\n" +
 		        "    <script src=\"https://code.jquery.com/jquery-3.7.1.min.js\"></script>\n" +
-		        "    <script src=\"./js/toastr.min.js\"></script>\n" +
 		        "    <script src=\"./js/evaluar_alumnos.js\"></script>\n" +
 		        "    <!--<link rel=\"stylesheet\" type=\"text/css\" href=\"./css/evaluar_ajax.css\">-->\n" +
 		        "\n" +
 		        "    \n" +
-		        "    <!-- Custom styles for this template -->\n" +
-		        "    <link href=\"pricing.css\" rel=\"stylesheet\">\n" +
 		        "  </head>\n" +
 		        "  <body>\n" +
+		        "    <div id=\"toast-container\" class=\"position-fixed top-0 end-0 p-3\" style=\"z-index: 1100;\"></div>\r\n"+
 		        "    <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"d-none\">\n" +
 		        "      <symbol id=\"check2\" viewBox=\"0 0 16 16\">\n" +
 		        "        <path d=\"M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z\"/>\n" +
@@ -239,7 +235,7 @@ public class evaluar extends HttpServlet {
 		        "          </div>\n" +
 		        "          <div class=\"card-body\">\n" +
 		        "            <div class=\"tarjeta\">\n" +
-		        "              <img src=\"https://robohash.org/abb\" alt=\"foto del alumno\"/>\n" +
+		        "              <img id=\"foto_alumno_base64\" src=\"\" alt=\"foto del alumno\"/>\n" +
 		        "              <!--<p id=\"alumno_nombre\"></p>-->\n" +
 		        "              <div class=\"arrows_container\">\n" +
 		        "                  <button id=\"btn_left\" type=\"button\" class=\"w-100 btn btn-lg btn-primary\">L</button>\n" +
