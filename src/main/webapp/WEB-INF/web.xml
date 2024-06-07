@@ -270,4 +270,14 @@
     <servlet-name>certificado</servlet-name>
     <url-pattern>/certificado</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>volverInicio</display-name>
+    <servlet-name>volverInicio</servlet-name>
+    <servlet-class>volverInicio</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>volverInicio</servlet-name>
+    <url-pattern>/volverInicio</url-pattern>
+  </servlet-mapping>
 </web-app>
