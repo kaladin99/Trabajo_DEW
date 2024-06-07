@@ -1,9 +1,12 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -82,7 +85,6 @@ public class certificado extends HttpServlet {
         String nombreApellido = nombre+" "+apellidos;
 
 
-		System.out.println(asignaturaAlumno);
 
 		String res = "";
 		for(int i = 0; i< asignaturasJSON.length(); i++) {
@@ -125,6 +127,11 @@ public class certificado extends HttpServlet {
 
         // Obtener el nombre del mes en español
         String nombreMes = mes.getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+        
+        //Obtener la foto del alumno en base 64
+        File file = new File(getServletContext().getRealPath("/assets/fotos/" + dni + ".pngb64"));
+        byte[] fileContent = Files.readAllBytes(file.toPath());
+        String fileContentString = new String(fileContent, StandardCharsets.UTF_8);
 
         out.println( "<body>\r\n"
     		    + "    <div class=\"container\">\r\n"
@@ -134,7 +141,7 @@ public class certificado extends HttpServlet {
     		    + "                DEW 23/24 certifica que el alumn@ "+nombreApellido+", con DNI "+dni+", matriculado en el curso 2023/2024, ha obtenido\r\n"
     		    + "                las calificaciones que se muestran en la siguiente tabla:\r\n"
     		    + "            </p>\r\n"
-    		    + "            <img src=\"fotos/h/1.png\" alt=\"Imagen del alumno\" class=\"image\">\r\n"
+    		    + "			<img src=\"data:image/png;base64, "+fileContentString+ "\" alt=\"Imagen del imagen\" class=\"image\">\r\n"
     		    + "        </div>\r\n"
     		    + "        <table class=\"table\">\r\n"
     		    + "            <thead>\r\n"
