@@ -166,16 +166,14 @@ public class detalle_alumno extends HttpServlet {
           byte[] fileContent = Files.readAllBytes(file.toPath());
           String fileContentString = new String(fileContent, StandardCharsets.UTF_8);
 		String res="";
-		int nota = 0;
+		double nota = 0;
 		  for(int i = 0; i< asignaturasJSON.length(); i++) {
 			 String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("asignatura");
 			 String notas_JSON = asignaturasJSON.getJSONObject(i).getString("nota");
-			 nota += notas_JSON.equals("") ? 0 : Integer.parseInt(notas_JSON);
-			 	
-			 
+			 nota += notas_JSON.equals("") ? 0 : Double.parseDouble(notas_JSON);			 
 			 res+= acronimo_asig + " ";
 		}
-		int media = nota / asignaturasJSON.length();
+		double media = nota / asignaturasJSON.length();
 		out.println("<body>\n"
 				+ "    <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"d-none\">\n"
 				+ "      <symbol id=\"check2\" viewBox=\"0 0 16 16\">\n"
@@ -239,7 +237,7 @@ public class detalle_alumno extends HttpServlet {
 				+ "\n"
 				+ "    <div class=\"p-5 mb-4 bg-body-tertiary rounded-3\">\n"
 				+ "      <div class=\"container-fluid py-5\">\n"
-				+ "        <h1 class=\"display-5 fw-bold\"> "+ apellidos + ", " + nombre + " (" + request.getParameter("dni") + ") </br> Nota media: " + media +"</h1>\n"
+				+ "        <h1 class=\"display-5 fw-bold\"> "+ apellidos + ", " + nombre + " (" + request.getParameter("dni") + ") </br> Nota media: " + String.format("%.2f", media) +"</h1>\n"
 			
 				
 				+ "      </div>\n"
