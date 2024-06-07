@@ -215,7 +215,7 @@ public class profesor extends HttpServlet {
     			
     			
     			String prof = fetchGet(request, "/profesores/"+sesion.getAttribute("dni"));
-    			System.out.println(" profesor"+  prof);
+    			
     			if (prof == "") {
     				response.sendRedirect(request.getContextPath());
     				return;

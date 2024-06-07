@@ -260,4 +260,14 @@
     <servlet-name>detalle_asignatura_profesor</servlet-name>
     <url-pattern>/detalle_asignatura_profesor</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>certificado</display-name>
+    <servlet-name>certificado</servlet-name>
+    <servlet-class>certificado</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>certificado</servlet-name>
+    <url-pattern>/certificado</url-pattern>
+  </servlet-mapping>
 </web-app>
