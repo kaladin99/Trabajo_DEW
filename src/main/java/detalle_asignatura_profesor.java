@@ -329,7 +329,7 @@ public class detalle_asignatura_profesor extends HttpServlet {
     			out.println("    <div class=\"p-5 mb-4 bg-body-tertiary rounded-3\" style=\"background-image: url('wallpaper.png'); background-size: cover;\">\r\n"
     				        + "      <div class=\"container-fluid py-5\">\r\n"	
     				        + "        <h1 class=\"display-5 fw-bold\" style=\"color: white;\"!important >Notas OnLine. Alumnos de la asignatura "+asignaturaAcronimo+"</h1>\r\n"
-    				        + "        <p class=\"col-md-8 fs-4\" style=\"color: white;\"!important>En esta página se muestran las asignaturas que impartes.</br>Al pulsar en una podrás acceder a la lista de alumnos matriculados y la información sobre la asignatura seleccionada.</p>\r\n"
+    				        + "        <p class=\"col-md-8 fs-4\" style=\"color: white;\"!important>En esta página se muestra la lista de alumnos matriculados.</br>Al pulsar en uno podrás acceder a la vista detallada del alumno seleccionado.</p>\r\n"
     				        + "      </div>\r\n"
     				        + "    </div>\r\n"
     				        + "    \r\n"
