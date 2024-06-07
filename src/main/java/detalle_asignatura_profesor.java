@@ -198,17 +198,41 @@ public class detalle_asignatura_profesor extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	HttpSession sesion = request.getSession();
-    			
-    			
+    			HttpSession sesion = request.getSession();
+    			String dniProf = (String) sesion.getAttribute("dni");
+    			boolean imparteAsignatura = false;
+    			//si no tiene sesion abierta te manda al home
     			if(sesion.getAttribute("key") == null) {
     				response.sendRedirect(request.getContextPath());
     				return;
     			}
-    			
+    			//si no es un profesor te manda al home
     			String prof = fetchGet(request, "/profesores/"+sesion.getAttribute("dni"));
     			if (prof == "") {
     				response.sendRedirect(request.getContextPath());
+    				return;
+    			}
+    			
+    			//Si no es un profesor de la asignatura te manda a /profesor
+    			
+    			//se obtiene el acronimo de la asignatura
+    			String asignaturaAcronimo = request.getParameter("acronimo_asig");
+    			
+    			//se obtienen los profesor que dan una asignatura
+    			String profDeAsig = fetchGet(request, "/asignaturas/"+asignaturaAcronimo+"/profesores");
+    			JSONArray profDeAsigJSON = new JSONArray(profDeAsig);
+    			
+    			//se recorre el json en para ver si el profesor de dniProf imparte docencia en la asignatura asignaturaAcronimo
+    			for(int i = 0; i < profDeAsigJSON.length(); i++) {
+    				String dniAux = profDeAsigJSON.getJSONObject(i).getString("dni");
+    				if(dniAux.equals(dniProf)) {
+    					imparteAsignatura = true;
+    					break;
+    				}
+    			}
+    			
+    			if (!imparteAsignatura) {
+    				response.sendRedirect(request.getContextPath() + "/profesor");
     				return;
     			}
     			//String key = sesion.getAttribute("key").toString();
@@ -218,8 +242,7 @@ public class detalle_asignatura_profesor extends HttpServlet {
     			PrintWriter out = response.getWriter();
     			out.println(preHTML5);
     			
-    			//String asignaturas = fetchGet(request, "/asignaturas");
-    			String asignaturaAcronimo = request.getParameter("acronimo_asig");
+    			
     				
     			
     			String alumnosAsignatura = fetchGet(request, "/asignaturas/"+asignaturaAcronimo+"/alumnos");
@@ -306,7 +329,7 @@ public class detalle_asignatura_profesor extends HttpServlet {
     			out.println("    <div class=\"p-5 mb-4 bg-body-tertiary rounded-3\" style=\"background-image: url('wallpaper.png'); background-size: cover;\">\r\n"
     				        + "      <div class=\"container-fluid py-5\">\r\n"	
     				        + "        <h1 class=\"display-5 fw-bold\" style=\"color: white;\"!important >Notas OnLine. Alumnos de la asignatura "+asignaturaAcronimo+"</h1>\r\n"
-    				        + "        <p class=\"col-md-8 fs-4\" style=\"color: white;\"!important>En esta página se muestran las asignaturas que impartes.</br>Al pulsar en una podrás acceder a la lista de alumnos matriculados y la información sobre la asignatura seleccionada.</p>\r\n"
+    				        + "        <p class=\"col-md-8 fs-4\" style=\"color: white;\"!important>En esta página se muestra la lista de alumnos matriculados.</br>Al pulsar en uno podrás acceder a la vista detallada del alumno seleccionado.</p>\r\n"
     				        + "      </div>\r\n"
     				        + "    </div>\r\n"
     				        + "    \r\n"

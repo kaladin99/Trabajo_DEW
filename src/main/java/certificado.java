@@ -68,7 +68,7 @@ public class certificado extends HttpServlet {
 		String asignaturaAlumno = fetchGet(request, "/alumnos/"+dni+"/asignaturas");
 		JSONArray asignaturasJSON = new JSONArray(asignaturaAlumno);
 		if (asignaturasJSON.length() == 0 ) {
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath() + "/alumno");
 			return;
 		}
 
