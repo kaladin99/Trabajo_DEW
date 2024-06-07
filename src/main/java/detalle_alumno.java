@@ -133,7 +133,7 @@ public class detalle_alumno extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 */   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
 		
@@ -145,7 +145,9 @@ public class detalle_alumno extends HttpServlet {
 		response.setCharacterEncoding("UTF-8"); 
 		PrintWriter out = response.getWriter();
 		out.println(HTML);
-		  String alumno = fetchGet(request, "/alumnos/"+request.getParameter("dni"));
+		//
+		
+	      String alumno = fetchGet(request, "/alumnos/"+request.getParameter("dni"));
 		  JSONObject nombreAlu = new JSONObject(alumno);        
           String nombre = nombreAlu.getString("nombre");
           String apellidos = nombreAlu.getString("apellidos");
