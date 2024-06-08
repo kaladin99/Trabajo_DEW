@@ -197,18 +197,27 @@ public class detalle_alumno extends HttpServlet {
           byte[] fileContent = Files.readAllBytes(file.toPath());
           String fileContentString = new String(fileContent, StandardCharsets.UTF_8);
 		String res="";
-		double notaAsig = 0;
-		double nota = 0;
-		  for(int i = 0; i< asignaturasJSON.length(); i++) {
-			 String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("asignatura");
-			 String notas_JSON = asignaturasJSON.getJSONObject(i).getString("nota");
-			 if (acronimo_asig.equals(request.getParameter("asig"))){
-				 notaAsig = Double.parseDouble(notas_JSON);
-			 }
-			 nota += notas_JSON.equals("") ? 0 : Double.parseDouble(notas_JSON);			 
-			 res+= acronimo_asig + " ";
+		double notaAsig = 0.0;
+		double nota = 0.0;
+		double media = 0.0;
+		try {
+			for(int i = 0; i< asignaturasJSON.length(); i++) {
+				 String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("asignatura");
+				 String notas_JSON = asignaturasJSON.getJSONObject(i).getString("nota");
+				 if (acronimo_asig.equals(request.getParameter("asig"))){
+					 notaAsig = Double.parseDouble(notas_JSON);
+				 }
+				 nota += notas_JSON.equals("") ? 0 : Double.parseDouble(notas_JSON);			 
+				 res+= acronimo_asig + " ";
+			}
+			  if (nota != 0 && asignaturasJSON.length() != 0) {
+				  media = nota / asignaturasJSON.length();
+			  }
+		} catch (Exception e) {
+			media = 0;
 		}
-		double media = nota / asignaturasJSON.length();
+		  
+		
 		out.println("<body>\n"
 				+ "    <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"d-none\">\n"
 				+ "      <symbol id=\"check2\" viewBox=\"0 0 16 16\">\n"

@@ -73,22 +73,6 @@ public class evaluar extends HttpServlet {
 			return;
 		}
 
-
-		if (asig == null) {
-			response.sendRedirect(request.getContextPath());
-			return;
-		}
-		
-		//FALTA COMPROBAR SI EL QUE ACCEDE A ESTE SERVLET ES PROFESOR Y ADEMÁS IMPARTA ESA ASIGNATURA
-		
-				
-		if (asig == null) {
-			response.sendRedirect(request.getContextPath());
-			return;
-		}
-		
-		//FALTA COMPROBAR SI EL QUE ACCEDE A ESTE SERVLET ES PROFESOR Y ADEMÁS IMPARTA ESA ASIGNATURA
-		
 		String preHTML5 = "<!doctype html>\n" +
 		        "<html lang=\"en\" data-bs-theme=\"auto\">\n" +
 		        "  <head><script src=\"./assets/js/color-modes.js\"></script>\n" +
