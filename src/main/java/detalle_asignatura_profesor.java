@@ -270,7 +270,7 @@ public class detalle_asignatura_profesor extends HttpServlet {
         	        	error = "7";
         	        	String nombreApellido = nombre+" "+apellido;
         	        	error = "8";
-        	        	String linea = "<li><a href='./detalle_alumno?dni="+dni+"'>"+nombreApellido+"</a> "+ "Nota: "+nota+"</li>\r\n";
+        	        	String linea = "<li><a href='./detalle_alumno?dni="+dni+"&asig="+asignaturaAcronimo+"'>"+nombreApellido+"</a> "+ "Nota: "+nota+"</li>\r\n";
         	        	error = "9";
         	        	res += linea;
         	        	error = "10";

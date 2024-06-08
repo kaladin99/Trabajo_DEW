@@ -280,4 +280,14 @@
     <servlet-name>volverInicio</servlet-name>
     <url-pattern>/volverInicio</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>cambiar_nota_servlet</display-name>
+    <servlet-name>cambiar_nota_servlet</servlet-name>
+    <servlet-class>cambiar_nota_servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cambiar_nota_servlet</servlet-name>
+    <url-pattern>/cambiar_nota_servlet</url-pattern>
+  </servlet-mapping>
 </web-app>

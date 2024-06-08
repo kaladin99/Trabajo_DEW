@@ -197,10 +197,14 @@ public class detalle_alumno extends HttpServlet {
           byte[] fileContent = Files.readAllBytes(file.toPath());
           String fileContentString = new String(fileContent, StandardCharsets.UTF_8);
 		String res="";
+		double notaAsig = 0;
 		double nota = 0;
 		  for(int i = 0; i< asignaturasJSON.length(); i++) {
 			 String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("asignatura");
 			 String notas_JSON = asignaturasJSON.getJSONObject(i).getString("nota");
+			 if (acronimo_asig.equals(request.getParameter("asig"))){
+				 notaAsig = Double.parseDouble(notas_JSON);
+			 }
 			 nota += notas_JSON.equals("") ? 0 : Double.parseDouble(notas_JSON);			 
 			 res+= acronimo_asig + " ";
 		}
@@ -278,6 +282,12 @@ public class detalle_alumno extends HttpServlet {
 				+ "      <div class=\"col-md-6\">\n"
 				+ "        <div class=\"h-100 p-5 text-bg-dark rounded-3\">\n"
 				+ "			<img src=\"data:image/png;base64, "+fileContentString+ "\" alt=\"Ejemplo de imagen\" height=\"400\" width=\"400\">"
+				+" <form action='cambiar_nota_servlet' >"
+				+ "<input type='hidden'  name='dni' value='"+request.getParameter("dni")+"'>"
+				+ "<input type='hidden' name='asig' value='"+request.getParameter("asig")+"'>"
+				+ "<input type='text' name='nota' value='"+notaAsig+"'>"
+				+ "<input type='submit' value='Cambiar Nota'>"
+				+ "</form>'"
 				+ "        </div>\n"
 				+ "      </div>\n"
 				+ "      <div class=\"col-md-6\">\n"
