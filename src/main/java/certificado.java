@@ -33,7 +33,48 @@ public class certificado extends HttpServlet {
 		    + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
 		    + "    <title>Certificado Imprimible</title>\r\n"
 		    + "    <link rel=\"stylesheet\" href=\"css/estilo_certificado.css\" type=\"text/css\">\r\n"
+		    + "    <style>\r\n"
+		    + "        .container {\r\n"
+		    + "            width: 21cm;\r\n" /* Ancho de una hoja A4 */
+		    + "            height: 29.7cm;\r\n" /* Alto de una hoja A4 */
+		    + "            padding: 2cm;\r\n" /* Márgenes */
+		    + "            box-sizing: border-box;\r\n"
+		    + "        }\r\n"
+		    + "        .text-image {\r\n"
+		    + "            display: flex;\r\n"
+		    + "            justify-content: space-between;\r\n"
+		    + "            align-items: flex-start;\r\n"
+		    + "            margin-bottom: 1cm;\r\n"
+		    + "        }\r\n"
+		    + "        .text {\r\n"
+		    + "            width: 60%;\r\n"
+		    + "            font-size: 12pt;\r\n"
+		    + "            line-height: 1.5;\r\n"
+		    + "            text-align: justify;\r\n"
+		    + "        }\r\n"
+		    + "        .image {\r\n"
+		    + "            width: 4cm;\r\n" /* Ancho de la imagen */
+		    + "            height: 4cm;\r\n" /* Altura de la imagen */
+		    + "        }\r\n"
+		    + "        .signature {\r\n"
+		    + "            display: flex;\r\n"
+		    + "            justify-content: space-between;\r\n"
+		    + "            align-items: center;\r\n"
+		    + "            margin-top: 1cm;\r\n"
+		    + "        }\r\n"
+		    + "        .signature-text {\r\n"
+		    + "            text-align: left;\r\n"
+		    + "        }\r\n"
+		    + "        .signature-container {\r\n"
+		    + "            display: flex;\r\n"
+		    + "            align-items: center;\r\n"
+		    + "        }\r\n"
+		    + "        .signature-container img {\r\n"
+		    + "            margin-left: 1cm;\r\n"
+		    + "        }\r\n"
+		    + "    </style>\r\n"
 		    + "</head>\r\n";
+
     private String nota;
 
     /**
@@ -133,34 +174,41 @@ public class certificado extends HttpServlet {
         byte[] fileContent = Files.readAllBytes(file.toPath());
         String fileContentString = new String(fileContent, StandardCharsets.UTF_8);
 
-        out.println( "<body>\r\n"
-    		    + "    <div class=\"container\">\r\n"
-    		    + "        <h1>Certificado sin validez acad&eacute;mica</h1>\r\n"
-    		    + "        <div class=\"text-image\">\r\n"
-    		    + "            <p class=\"text\">\r\n"
-    		    + "                DEW 23/24 certifica que el alumn@ "+nombreApellido+", con DNI "+dni+", matriculado en el curso 2023/2024, ha obtenido\r\n"
-    		    + "                las calificaciones que se muestran en la siguiente tabla:\r\n"
-    		    + "            </p>\r\n"
-    		    + "			<img src=\"data:image/png;base64, "+fileContentString+ "\" alt=\"Imagen del imagen\" class=\"image\">\r\n"
-    		    + "        </div>\r\n"
-    		    + "        <table class=\"table\">\r\n"
-    		    + "            <thead>\r\n"
-    		    + "                <tr>\r\n"
-    		    + "                    <th>Acr&oacute;nimo</th>\r\n"
-    		    + "                    <th>Asignatura</th>\r\n"
-    		    + "                    <th>Cr&eacute;ditos</th>\r\n"
-    		    + "                    <th>Curso</th>\r\n"
-    		    + "                    <th>Nota</th>\r\n"
-    		    + "                </tr>\r\n"
-    		    + "            </thead>\r\n"
-    		    + "            <tbody>\r\n"
-    		    +					res
-    		    + "            </tbody>\r\n"
-    		    + "        </table>\r\n"
-    		    + "        <p class=\"final\">En Valencia, a "+dia+" de "+nombreMes+" de "+año+"</p>\r\n"
-    		    + "    </div>\r\n"
-    		    + "</body>\r\n"
-    		    + "</html>");
+
+		out.println("<body>\r\n"
+		    + "    <div class=\"container\">\r\n"
+		    + "        <h1>Certificado sin validez acad&eacute;mica</h1>\r\n"
+		    + "        <div class=\"text-image\">\r\n"
+		    + "            <p class=\"text\">\r\n"
+		    + "                DEW 23/24 certifica que el alumn@ " + nombreApellido + ", con DNI " + dni + ", matriculado en el curso 2023/2024, ha obtenido\r\n"
+		    + "                las calificaciones que se muestran en la siguiente tabla:\r\n"
+		    + "            </p>\r\n"
+		    + "            <img src=\"data:image/png;base64, " + fileContentString + "\" alt=\"Imagen del alumno\" class=\"image\">\r\n"
+		    + "        </div>\r\n"
+		    + "        <table class=\"table\">\r\n"
+		    + "            <thead>\r\n"
+		    + "                <tr>\r\n"
+		    + "                    <th>Acr&oacute;nimo</th>\r\n"
+		    + "                    <th>Asignatura</th>\r\n"
+		    + "                    <th>Cr&eacute;ditos</th>\r\n"
+		    + "                    <th>Curso</th>\r\n"
+		    + "                    <th>Nota</th>\r\n"
+		    + "                </tr>\r\n"
+		    + "            </thead>\r\n"
+		    + "            <tbody>\r\n"
+		    +                 res
+		    + "            </tbody>\r\n"
+		    + "        </table>\r\n"
+		    + "        <div class=\"signature\">\r\n"
+		    + "            <p class=\"signature-text\">En Valencia, a " + dia + " de " + nombreMes + " de " + año + "</p>\r\n"
+		    + "            <img src=\"./imgs/logo-upv.png\" alt=\"Firma\" height=\"75\" width=\"200\">\r\n"
+		    + "        </div>\r\n"
+		    + "        <p class=\"final\">Firmado por la secretaria &copy;</p>\r\n"
+		    + "    </div>\r\n"
+		    + "</body>\r\n"
+		    + "</html>");
+
+        
 	}
 
 	/**
