@@ -167,13 +167,12 @@ public class detalle_alumno extends HttpServlet {
 		//se recorre el json en para ver si el profesor de dniProf imparte docencia en la asignatura asignaturaAcronimo
 		for(int i = 0; i < asigDeProfJSON.length(); i++) {
 			String acronimoProfAux = asigDeProfJSON.getJSONObject(i).getString("acronimo");
-			for(int j = 0; j < asignaturaAlumnoJSON.length(); j++) {
-				String acronimoAlumAux = asignaturaAlumnoJSON.getJSONObject(j).getString("asignatura");
+				String acronimoAlumAux = request.getParameter("asig");
 				if(acronimoProfAux.equals(acronimoAlumAux)) {
 					imparteAsignatura = true;
 					break;
 				}
-			}
+			
 		}
 		
 		if (!imparteAsignatura) {
