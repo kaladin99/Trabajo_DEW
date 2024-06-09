@@ -35,13 +35,9 @@ public class cambiar_nota_servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession sesion = request.getSession();
-
 		String dni = request.getParameter("dni");
         String asignatura = request.getParameter("asig");
         String nota = 		request.getParameter("nota");
-
-        
-		
 		try {
 			/* Creamos una conexión PUT a centro educativo */
 			String uri = urlCE+"/alumnos/" + dni + "/asignaturas/"+asignatura+"?key="+sesion.getAttribute("key").toString();
@@ -60,13 +56,11 @@ public class cambiar_nota_servlet extends HttpServlet {
 		    }
             
             int responseCode = con.getResponseCode();
-            //jsonObject.put("key", sesion.getAttribute("key").toString());
-            //jsonObject.put("uri", uri);
-            //jsonObject.put("cookie", cookie.split(";", 2)[0]);
+           
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
-            //jsonObject.put("response code", responseCode);
+          
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 // Procesar la respuesta
                 try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
@@ -87,10 +81,10 @@ public class cambiar_nota_servlet extends HttpServlet {
                         errorContent.append(inputLine);
                     }
                     System.out.println("Error Content: " + errorContent.toString());
-                  //  jsonObject.put("response", errorContent);
+                  
                 }
                 
-            	//out.print(jsonObject);
+            
             }
             
             con.disconnect();

@@ -257,10 +257,11 @@ public class profesor extends HttpServlet {
     			for(int i = 0; i< asignaturasJSON.length(); i++) {
     				  String acronimo_asig = asignaturasJSON.getJSONObject(i).getString("acronimo");
     				  String nombre_asig = asignaturasJSON.getJSONObject(i).getString("nombre");
-    				  double media = notaMedia(request,acronimo_asig);
+    				  double media1 = notaMedia(request,acronimo_asig);
+    				 String media = String.format("%.2f",media1);
     				  
     				  String linea = "<div class=\"row mb-3 text-center\">\n"
-    				              + "  <div class=\"col-md-4 themed-grid-col\"><a href='./detalle_asignatura_profesor?acronimo_asig="+acronimo_asig+"'>"+nombre_asig+"</a></div>\n"
+    				              + "  <div class=\"col-md-4 themed-grid-col\"><a href='./detalle_asignatura_profesor?acronimo_asig="+acronimo_asig+"&media="+media+"'>"+nombre_asig+"</a></div>\n"
     				              + "  <div class=\"col-md-4 themed-grid-col\">Nota media: "+media+"</div>\n"
     				              + "</div>\n";
     				  res += linea;
@@ -367,66 +368,39 @@ public class profesor extends HttpServlet {
         							String notaAsigAlum =  asigalumJSON.getJSONObject(j).getString("nota");
         							error = -4;
         							if(!notaAsigAlum.equals("")) {
-        								error  = -5;
+        								
         								double intNotaAsigAlum = Double.parseDouble(notaAsigAlum);
         								nota += intNotaAsigAlum;
-        								numNotas ++;
-        								error=-6;
+        								numNotas ++;	
         								
         							}else {
-        								error=-7;
+        								error=0;
         							}
-        							
         						}catch(Exception e) {
         							 return error ;
         						}
         					}
         				}
-        				
+        		
         			}
-        			
-        			
-        			
-        			
         			if (nota != 0 ) {
         				double notaMedia = nota / numNotas;
         				return notaMedia;
         			}else {
         				
-        				return error = -14;
+        				return error = 0;
         			}
         				
     		
     			}catch(Exception e) {
-    				error= -3;
+    				error= 0;
     				return error;
     			}
     				
     		}
     		
     		
-    		private void ponerNotasRandom(HttpServletRequest request) {
-    			int nota = 0;
-    			int numNotas = 0;
-    			String alumnos = fetchGet(request, "/alumnos");
-    			JSONArray alumnosJSON= new JSONArray(alumnos);
-    			for( int i = 0; i<alumnosJSON.length(); i++){
-    				String dnialum = alumnosJSON.getJSONObject(i).getString("dni");
-    				String alumnosasig = fetchGet(request, "/alumnos"+ dnialum + "asignaturas");
-    				JSONArray asigalumJSON= new JSONArray(alumnosasig);
-    				for (int j = 0; j < asigalumJSON.length();j++) {
-    					String asignaturaAlumno = alumnosJSON.getJSONObject(j).getString("asignatura");
-    					double randomDouble = Math.random(); 
-    			        // Escala el número aleatorio a un rango entre 0 y 10
-    			        int randomNumber = (int) (randomDouble * 11);
-    			        
-    			        
-    				}
-    				
-    			}
-    			
-    			
-    		}
+    		
     		
     		private String fetchGet(HttpServletRequest request, String url) {
     			HttpSession sesion = request.getSession();

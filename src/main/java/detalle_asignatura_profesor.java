@@ -250,6 +250,7 @@ public class detalle_asignatura_profesor extends HttpServlet {
     	        //JSONObject dni = new JSONObject(alumnos);
     			String error = "";
     			String res = "";
+    			
     			try {
     				JSONArray alumnosAsignaturaJSON = new JSONArray(alumnosAsignatura);
     				error = "1";
@@ -330,7 +331,9 @@ public class detalle_asignatura_profesor extends HttpServlet {
     				        + "      <div class=\"container-fluid py-5\">\r\n"	
     				        + "        <h1 class=\"display-5 fw-bold\" style=\"color: white;\"!important >Notas OnLine. Alumnos de la asignatura "+asignaturaAcronimo+"</h1>\r\n"
     				        + "        <p class=\"col-md-8 fs-4\" style=\"color: white;\"!important>En esta página se muestra la lista de alumnos matriculados.</br>Al pulsar en uno podrás acceder a la vista detallada del alumno seleccionado.</p>\r\n"
-    				        + "      </div>\r\n"
+    				        + "   <h2 class=\"display-5 fw-bold\" style=\"color: white;\"!important >La nota media de "+asignaturaAcronimo+" es: "+request.getParameter("media")+"</h2>\r\n "
+    				        
+    				        + "</div>\r\n"
     				        + "    </div>\r\n"
     				        + "    \r\n"
     				        + "\r\n"
