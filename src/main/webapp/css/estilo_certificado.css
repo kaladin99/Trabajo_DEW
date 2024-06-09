@@ -13,13 +13,13 @@ body {
 
 .text-image {
     display: flex;
-    justify-content: flex-start; /* Alinea los elementos al inicio */
+    justify-content: space-between; /* Alinea los elementos a ambos extremos */
     align-items: flex-start;
     margin-bottom: 1cm;
 }
 
 .text {
-    width: 12cm; /* Ancho del párrafo */
+    width: 60%; /* Ajusta el ancho del párrafo según sea necesario */
     font-size: 12pt;
     line-height: 1.5;
     text-align: justify; /* Justifica el texto */
@@ -28,25 +28,36 @@ body {
 .image {
     width: 4cm; /* Ancho de la imagen */
     height: 4cm; /* Altura de la imagen */
-    margin-left: 1cm; /* Separación de la imagen respecto al texto */
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
-     margin-bottom: 0.5 cm;
+    margin-bottom: 0.5cm;
 }
 
 .table th, .table td {
     border: 1px solid black;
     padding: 0.5cm;
     text-align: left;
-
 }
 
 .table th {
     background-color: #f2f2f2;
 }
-.final{
-	text-align: right;
+
+.signature {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1cm;
+}
+
+.signature-text {
+    text-align: left;
+}
+
+.final {
+    text-align: right;
+    margin-top: 1cm;
 }
