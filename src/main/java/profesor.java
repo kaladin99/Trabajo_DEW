@@ -261,7 +261,7 @@ public class profesor extends HttpServlet {
     				 String media = String.format("%.2f",media1);
     				  
     				  String linea = "<div class=\"row mb-3 text-center\">\n"
-    				              + "  <div class=\"col-md-4 themed-grid-col\"><a href='./detalle_asignatura_profesor?acronimo_asig="+acronimo_asig+"&media="+media+"'>"+nombre_asig+"</a></div>\n"
+    				              + "  <div class=\"col-md-4 themed-grid-col\"><a href='./detalle_asignatura_profesor?acronimo_asig="+acronimo_asig+"'>"+nombre_asig+"</a></div>\n"
     				              + "  <div class=\"col-md-4 themed-grid-col\">Nota media: "+media+"</div>\n"
     				              + "</div>\n";
     				  res += linea;

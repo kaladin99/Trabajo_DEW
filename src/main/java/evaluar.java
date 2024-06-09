@@ -43,7 +43,7 @@ public class evaluar extends HttpServlet {
 			return;
 		}
 		
-    	boolean isProfesorValido = false;
+    	boolean isProfesorValido = true;
     	
     	if(sesion.getAttribute("key") == null) {
 			response.sendRedirect(request.getContextPath());
@@ -52,18 +52,25 @@ public class evaluar extends HttpServlet {
     	
     	String profesores = fetchGet(request, "/profesores");
 		JSONArray profesoresJSON= new JSONArray(profesores);
-    	
+		JSONArray asignaturasProfesorJSON = new JSONArray();
 		for( int i = 0; i<profesoresJSON.length(); i++){
 			String profesor_dni = profesoresJSON.getJSONObject(i).getString("dni");
 			if (profesor_dni.equals(sesion.getAttribute("dni"))) {
 				String asignaturasProfesor = fetchGet(request, "/profesores/" + profesor_dni + "/asignaturas");
-				JSONArray asignaturasProfesorJSON = new JSONArray(asignaturasProfesor);
+				asignaturasProfesorJSON = new JSONArray(asignaturasProfesor);
 				for( int x = 0; x<asignaturasProfesorJSON.length(); x++){
-					String acronimo_asignatura = asignaturasProfesorJSON.getJSONObject(i).getString("acronimo");
+					String acronimo_asignatura = "";
+					acronimo_asignatura = asignaturasProfesorJSON.getJSONObject(x).getString("acronimo");
+			
 					if (acronimo_asignatura.equals(asig)) {
 						isProfesorValido = true;
+						break;
 					}
 				}
+				
+				if (isProfesorValido) {
+		            break;
+		        }
 				
 			}
 		}
@@ -270,7 +277,7 @@ public class evaluar extends HttpServlet {
 		        "\n" +
 		        "    <div class=\"pricing-header p-3 pb-md-4 mx-auto text-center\">\n" +
 		        "      <h1 class=\"display-4 fw-normal text-body-emphasis\">Evaluar alumnos</h1>\n" +
-		        "      <p id=\"alumnos\"></p>      \n" +
+		        "      <p id=\"alumnos\"></p> \n" +
 		        "    </div>\n" +
 		        "  </header>\n" +
 		        "\n" +

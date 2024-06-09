@@ -282,7 +282,7 @@ public class detalle_asignatura_profesor extends HttpServlet {
     				//res = error;
     			}
     	        
-    	        	
+    	        double mediaFn = notaMedia(request,asignaturaAcronimo);
     	        
     	        
     	       
@@ -331,7 +331,7 @@ public class detalle_asignatura_profesor extends HttpServlet {
     				        + "      <div class=\"container-fluid py-5\">\r\n"	
     				        + "        <h1 class=\"display-5 fw-bold\" style=\"color: white;\"!important >Notas OnLine. Alumnos de la asignatura "+asignaturaAcronimo+"</h1>\r\n"
     				        + "        <p class=\"col-md-8 fs-4\" style=\"color: white;\"!important>En esta página se muestra la lista de alumnos matriculados.</br>Al pulsar en uno podrás acceder a la vista detallada del alumno seleccionado.</p>\r\n"
-    				        + "   <h2 class=\"display-5 fw-bold\" style=\"color: white;\"!important >La nota media de "+asignaturaAcronimo+" es: "+request.getParameter("media")+"</h2>\r\n "
+    				        + "   <h2 class=\"display-5 fw-bold\" style=\"color: white;\"!important >La nota media de "+asignaturaAcronimo+" es: "+String.format("%.2f", mediaFn)+"</h2>\r\n "
     				        
     				        + "</div>\r\n"
     				        + "    </div>\r\n"
@@ -455,6 +455,69 @@ public class detalle_asignatura_profesor extends HttpServlet {
     			}
     			
     			
+    		}
+    		
+    		private double notaMedia(HttpServletRequest request, String asignatura ){
+    			int error = 0;
+    			double nota = 0;
+    			int numNotas = 0;
+    			// agafe el alumnes i els recorrec
+    			String alumnos = fetchGet(request, "/alumnos");
+    			JSONArray alumnosJSON= new JSONArray(alumnos);
+    			try {
+    				
+        			
+        			for( int i = 0; i<alumnosJSON.length(); i++){
+        				// de cada alumne recorrec les assignatures que te 
+        				String dnialum = alumnosJSON.getJSONObject(i).getString("dni");
+        				
+        				String alumnosasig = fetchGet(request, "/alumnos/"+ dnialum + "/asignaturas");
+        				
+        				JSONArray asigalumJSON= new JSONArray(alumnosasig);
+        				
+        				
+        				for (int j = 0; j < asigalumJSON.length();j++) {
+        					
+        					
+        					// si la assignatura es la que esta en la capçalera i no es null la afegisc a nota
+        					String asignaturaAlumno = asigalumJSON.getJSONObject(j).getString("asignatura");
+        					
+        					if(asignaturaAlumno.equals(asignatura)) {
+        						
+        						try {
+        							error = -3;
+        							String notaAsigAlum =  asigalumJSON.getJSONObject(j).getString("nota");
+        							error = -4;
+        							if(!notaAsigAlum.equals("")) {
+        								
+        								double intNotaAsigAlum = Double.parseDouble(notaAsigAlum);
+        								nota += intNotaAsigAlum;
+        								numNotas ++;	
+        								
+        							}else {
+        								error=0;
+        							}
+        						}catch(Exception e) {
+        							 return error ;
+        						}
+        					}
+        				}
+        		
+        			}
+        			if (nota != 0 ) {
+        				double notaMedia = nota / numNotas;
+        				return notaMedia;
+        			}else {
+        				
+        				return error = 0;
+        			}
+        				
+    		
+    			}catch(Exception e) {
+    				error= 0;
+    				return error;
+    			}
+    				
     		}
     		
     		private String fetchGet(HttpServletRequest request, String url) {
